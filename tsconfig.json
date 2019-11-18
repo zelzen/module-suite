@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "allowJs": false,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "lib": [
+      "esnext"
+    ],
+    "outDir": "./lib",
+    "baseUrl": "."
+  },
+  "exclude": [
+    "node_modules",
+    "lib",
+    "__tests__",
+    "**/*.test.ts",
+    "**/*.test.tsx"
+  ]
+}

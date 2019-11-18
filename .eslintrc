@@ -1,0 +1,11 @@
+{
+  "extends": [
+    "@zelz/eslint-config",
+    "@zelz/eslint-config/typescript",
+    "@zelz/eslint-config/prettier"
+  ],
+  "rules": {
+    // This isn't as applicable since ESM
+    "import/no-dynamic-require": "off"
+  }
+}

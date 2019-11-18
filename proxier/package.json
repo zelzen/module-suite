@@ -1,0 +1,50 @@
+{
+  "name": "@module-suite/proxier",
+  "version": "0.6.0",
+  "main": "lib/index.js",
+  "module": "lib/index.esm.js",
+  "types": "lib/proxier/src/index.d.ts",
+  "homepage": "https://github.com/zelzen/module-suite",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zelzen/module-suite",
+    "directory": "/proxier"
+  },
+  "author": "Gabe Meola <hey@gabe.mx>",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "NODE_ENV=production node lib/index.js",
+    "start:watch": "NODE_ENV=development nodemon --on-change-only --watch lib/index.js --exec \"node --inspect\" lib/index.js",
+    "test": "echo 'no tests yet :('",
+    "lint": "eslint \"./**/*.{ts,js}\"",
+    "lint:fix": "yarn lint --fix",
+    "dev": "concurrently -i -p '[{name}]' -n 'Server,Build ' -c 'bgBlue.bold,bgMagenta.bold' 'yarn start:watch' 'yarn build:watch'",
+    "build": "rm -rf lib/ && yarn build:js && yarn build:types",
+    "build:js": "NODE_ENV=production rollup -c",
+    "build:types": "tsc -p . --emitDeclarationOnly",
+    "build:watch": "NODE_ENV=development rollup -c -w",
+    "clean": "rm -rf lib/"
+  },
+  "engines": {
+    "node": "^10"
+  },
+  "dependencies": {
+    "@module-suite/bundle": "^0.3.0",
+    "@module-suite/rewrite": "^0.4.0",
+    "follow-redirects": "^1.9.0",
+    "fresh": "^0.5.2",
+    "gunzip-maybe": "^1.4.1",
+    "mime-types": "^2.1.24",
+    "semver": "^6.3.0",
+    "tar-stream": "^2.1.0"
+  },
+  "devDependencies": {
+    "@types/follow-redirects": "^1.8.0",
+    "@types/fresh": "^0.5.0",
+    "@types/jest": "^24.0.20",
+    "@types/mime-types": "^2.1.0",
+    "@types/node": "^10",
+    "@types/semver": "^6.2.0",
+    "@types/tar-stream": "^1.6.1"
+  }
+}
