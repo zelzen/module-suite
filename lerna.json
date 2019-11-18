@@ -1,0 +1,18 @@
+{
+  "packages": [
+    "proxier",
+    "test-module",
+    "rewrite-module",
+    "bundle-module"
+  ],
+  "version": "independent",
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "command": {
+    "publish": {
+      "ignoreChanges": ["*.md", "*.mdx"],
+      "message": "chore(release): ",
+      "push": false
+    }
+  }
+}

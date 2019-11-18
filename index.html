@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Test Thing</title>
+</head>
+<body>
+  <h1>Yo</h1>
+  <script>
+    window.process = { env: { NODE_ENV: 'production' } };
+  </script>
+  <script type="module">
+    import { createStore } from 'http://localhost:3030/redux@4.0.1';
+    // import React from 'http://localhost:3030/react@16.8.6/umd/react.development.js';
+
+    const store = createStore((state, action) => {
+      return 'yo'
+    })
+
+    console.log(store);
+    // console.log('react', React);
+  </script>
+</body>
+</html>
