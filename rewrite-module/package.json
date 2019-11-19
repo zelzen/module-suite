@@ -16,6 +16,9 @@
   "publishConfig": {
     "access": "public"
   },
+  "files": [
+    "lib"
+  ],
   "engines": {
     "node": ">=10"
   },

@@ -13,6 +13,9 @@
   "publishConfig": {
     "access": "public"
   },
+  "files": [
+    "lib"
+  ],
   "author": "Gabe Meola <hey@gabe.mx>",
   "license": "UNLICENSED",
   "scripts": {
