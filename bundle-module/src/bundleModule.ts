@@ -74,7 +74,7 @@ export default async function bundleModule(
       banner,
       // Rewrite external imports
       // to be fully qualified urls.
-      // e.g. "object-assign" => "https://d3pfvg4wng2sfk.cloudfront.net/object-assign@^4.1.1?output=system"
+      // e.g. "object-assign" => "https://module-cdn.exmaple.com/object-assign@^4.1.1?output=system"
       paths(id): string {
         // Skip id which are already urls
         if (id.startsWith('http')) return id;

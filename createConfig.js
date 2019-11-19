@@ -5,14 +5,16 @@ const extension = require('rollup-plugin-extensions');
 const json = require('rollup-plugin-json');
 const nodeStandardLibrary = require('builtins');
 
+const { NODE_ENV = 'production' } = process.env;
+
 function createConfig({
   input,
   pkgJson,
-  isDev = process.env.NODE_ENV !== 'production',
+  isDev = NODE_ENV !== 'production',
   plugins = [],
   externals = [],
   extensions = ['.tsx', '.ts', '.jsx', '.js'],
-  sourcemap = true,
+  sourcemap = false,
 }) {
   // Gather external modules
   const pkgExternals = new Set(
@@ -108,6 +110,8 @@ Make sure this dependency is listed in the package.json
     configs.push(esmConfig);
   }
 
+  // Set the base config
+  configs.base = baseConfig;
   // Return all configs
   return configs;
 }

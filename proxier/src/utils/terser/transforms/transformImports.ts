@@ -64,7 +64,7 @@ export default <Transformer>(
         if (importedModuleVersion == null) {
           throw `[AST] Imported Module "${importedPackageName}" not listed as a dependency or peerDependency`;
         }
-        // TODO: Support Semver Ranges. This will need changes in retrievePackage to search semver from artifactory
+        // TODO: Support Semver Ranges. This will need changes in retrievePackage to search semver from registry
         // Floor the semver version
         importedModuleVersion = (semver.minVersion(importedModuleVersion) as semver.SemVer).version;
 

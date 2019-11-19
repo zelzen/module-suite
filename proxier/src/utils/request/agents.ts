@@ -2,13 +2,13 @@ import { Agent } from 'https';
 import { RequestOptions } from 'http';
 import get from './get';
 
-export const artifactoryAgent = new Agent({
+export const registryAgent = new Agent({
   keepAlive: true,
 });
 
-export function getArtifactory(url: string, options?: RequestOptions) {
+export function getRegistry(url: string, options?: RequestOptions) {
   return get(url, {
-    agent: artifactoryAgent,
+    agent: registryAgent,
     ...options,
   });
 }

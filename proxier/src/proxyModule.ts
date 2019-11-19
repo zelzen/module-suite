@@ -141,10 +141,10 @@ export default async function proxyModule(
     });
 
     // TODO: Support filenames which are directories
-    // https://esm-proxier.a-us-dev.wfk8s.com/@p4m/object-details-headers@4.4.1/es/proj
+    // /es/proj
     //
     // TODO: Support filenames which leave off the `.js` (maybe don't support this..., have them fix it)
-    // https://esm-proxier.a-us-dev.wfk8s.com/@p4m/object-details-headers@4.4.1/es/shared/components/IframeFormSubmit.component
+    // /es/shared/components/IframeFormSubmit.component
     //
     // Lookup package entry if filename is not provided
     if (fileName === '') {
@@ -195,7 +195,6 @@ export default async function proxyModule(
     // the `.js` portion of the extensions such as:
     //   - /core-js@2.6.9/library/modules/es6.object.assign?output=system
     //   - /draft-js@0.11.1/lib/DraftEditor.react?output=system
-    // https://gitlab.workfront.tech/core-platform/devtools/module-suite/issues/9
     //
     // TODO: This logic should be superseded by downloading the
     // package tar file and searching for a correct matching file.
@@ -245,7 +244,7 @@ export default async function proxyModule(
         // TODO: This only works with output='esm' currently since
         // rewriteModule rewrites all external imports too.
         // bundle-module probably needs to consume rewrite-module
-        // with plain code from artifactory being passed in.
+        // with plain code from registry being passed in.
         const [bundle] = await bundleModule(await fileContent, {
           host,
           packageName,

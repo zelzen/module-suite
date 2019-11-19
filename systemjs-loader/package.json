@@ -1,0 +1,42 @@
+{
+  "name": "@module-suite/systemjs-loader",
+  "version": "0.0.24",
+  "main": "lib/index.js",
+  "module": "lib/index.esm.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zelzen/module-suite",
+    "directory": "/systemjs-loader"
+  },
+  "author": "Gabe M <hey@gabe.mx>",
+  "contributors": [
+    "Gabe M <hey@gabe.mx>"
+  ],
+  "license": "UNLICENSED",
+  "files": [
+    "lib",
+    "dist"
+  ],
+  "scripts": {
+    "start": "live-server --no-browser",
+    "dev": "concurrently -p '[{name}]' -n 'Build ,Server' -c 'bgBlue.bold,bgMagenta.bold' 'yarn build:watch' 'yarn start'",
+    "build": "NODE_ENV=production rollup -c",
+    "build:watch": "NODE_ENV=development rollup -c -w",
+    "lint": "eslint .",
+    "test": "echo 'no test yet :('"
+  },
+  "dependencies": {
+    "semver": "^6.3.0",
+    "semver-intersect": "^1.4.0"
+  },
+  "devDependencies": {
+    "@types/semver": "^6.0.2",
+    "live-server": "^1.2.1",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "systemjs": "^6.1.1"
+  },
+  "peerDependencies": {
+    "systemjs": "^6.1.1"
+  }
+}

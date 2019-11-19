@@ -5,7 +5,8 @@
     "proxier",
     "test-module",
     "rewrite-module",
-    "bundle-module"
+    "bundle-module",
+    "systemjs-loader"
   ],
   "version": "1.0.0",
   "repository": {
@@ -22,8 +23,8 @@
     "test": "echo 'no tests yet :('",
     "lint": "eslint \"./**/*.{ts,js}\"",
     "lint:fix": "yarn lint --fix",
-    "releasexx": "lerna publish --yes --conventional-commits",
-    "release": "lerna publish --yes --conventional-commits --create-release github"
+    "release": "lerna publish --yes --conventional-commits",
+    "releasexx": "lerna publish --yes --conventional-commits --create-release github"
   },
   "devDependencies": {
     "@babel/core": "7.7.2",

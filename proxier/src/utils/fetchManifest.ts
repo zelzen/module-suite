@@ -1,6 +1,6 @@
 import { PackageJson, Repository } from 'shared/models/packageJson';
 import { parseJsonBody } from './request';
-import { getArtifactory as get } from './request/agents';
+import { getRegistry as get } from './request/agents';
 
 // https://github.com/npm/registry/blob/master/docs/responses/package-metadata.md#abbreviated-version-object
 export type AbbreviatedPackageJson = {

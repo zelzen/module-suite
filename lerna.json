@@ -3,7 +3,8 @@
     "proxier",
     "test-module",
     "rewrite-module",
-    "bundle-module"
+    "bundle-module",
+    "systemjs-loader"
   ],
   "version": "independent",
   "npmClient": "yarn",
