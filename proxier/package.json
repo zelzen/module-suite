@@ -1,6 +1,6 @@
 {
   "name": "@module-suite/proxier",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
   "types": "lib/proxier/src/index.d.ts",
@@ -35,8 +35,8 @@
     "node": ">=10"
   },
   "dependencies": {
-    "@module-suite/bundle": "^0.3.1",
-    "@module-suite/rewrite": "^0.4.1",
+    "@module-suite/bundle": "^0.3.2",
+    "@module-suite/rewrite": "^0.4.2",
     "follow-redirects": "^1.9.0",
     "fresh": "^0.5.2",
     "gunzip-maybe": "^1.4.1",
