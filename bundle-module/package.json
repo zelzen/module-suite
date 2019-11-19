@@ -13,6 +13,9 @@
     "url": "https://github.com/zelzen/module-suite",
     "directory": "/bundle-module"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "dev": "rollup -c -w",
     "build": "rm -rf lib/ && yarn build:js && yarn build:types",

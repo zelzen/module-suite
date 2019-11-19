@@ -22,6 +22,7 @@
     "test": "echo 'no tests yet :('",
     "lint": "eslint \"./**/*.{ts,js}\"",
     "lint:fix": "yarn lint --fix",
+    "releasexx": "lerna publish --yes --conventional-commits",
     "release": "lerna publish --yes --conventional-commits --create-release github"
   },
   "devDependencies": {

@@ -10,6 +10,9 @@
   },
   "main": "bin/testModule.js",
   "author": "Gabe M <hey@gabe.mx>",
+  "publishConfig": {
+    "access": "public"
+  },
   "license": "UNLICENSED",
   "bin": {
     "module-test": "./bin/testModule.js"

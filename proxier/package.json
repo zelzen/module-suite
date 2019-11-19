@@ -10,6 +10,9 @@
     "url": "https://github.com/zelzen/module-suite",
     "directory": "/proxier"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "Gabe Meola <hey@gabe.mx>",
   "license": "UNLICENSED",
   "scripts": {
