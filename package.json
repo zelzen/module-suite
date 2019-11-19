@@ -5,7 +5,8 @@
     "proxier",
     "test-module",
     "rewrite-module",
-    "bundle-module"
+    "bundle-module",
+    "systemjs-loader"
   ],
   "version": "1.0.0",
   "repository": {

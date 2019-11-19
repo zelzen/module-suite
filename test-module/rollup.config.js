@@ -6,6 +6,5 @@ const createConfig = require('../createConfig');
 module.exports = createConfig({
   input: path.join(__dirname, 'testModule.ts'),
   pkgJson: pkg,
-  sourcemap: false,
   plugins: [hashbang()],
 });
