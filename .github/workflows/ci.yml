@@ -1,9 +1,11 @@
-name: Node CI
+name: CI
 
 on: [push]
+env:
+  CI: "true"
 
 jobs:
-  build:
+  validate:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -14,10 +16,34 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: yarn install, build, and test
+    - run: yarn install
+    - run: yarn lint
+    - run: yarn test
+    - run: yarn build
+
+  publish:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    needs: ['validate']
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js 10
+      uses: actions/setup-node@v1
+      with:
+        node-version: 10
+        registry-url: https://registry.npmjs.org/
+    - name: Setup Git
       run: |
-        yarn install
-        yarn test
-        yarn build
+        git config --local user.email "dev@zelzen.io"
+        git config --local user.name "Zelzen Bot"
+        git checkout -B master
+    - run: yarn install
+    - run: yarn build
+    - run: yarn release
       env:
-        CI: "true"
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        # github_token: ${{ secrets.GH_TOKEN }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}

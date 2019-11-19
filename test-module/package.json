@@ -1,6 +1,6 @@
 {
   "name": "@module-suite/test",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "Test your Microfrontend modules to ensure compatibility with Module CDN",
   "homepage": "https://github.com/zelzen/module-suite",
   "repository": {
@@ -10,6 +10,9 @@
   },
   "main": "bin/testModule.js",
   "author": "Gabe M <hey@gabe.mx>",
+  "publishConfig": {
+    "access": "public"
+  },
   "license": "UNLICENSED",
   "bin": {
     "module-test": "./bin/testModule.js"
@@ -22,7 +25,7 @@
     "build": "NODE_ENV=production rollup -c"
   },
   "dependencies": {
-    "@module-suite/rewrite": "^0.4.0",
+    "@module-suite/rewrite": "^0.4.1",
     "commander": "^4.0.0",
     "fs-extra": "^8.1.0",
     "yurnalist": "^1.1.1"

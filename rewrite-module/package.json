@@ -1,6 +1,6 @@
 {
   "name": "@module-suite/rewrite",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Rewrites a module",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
@@ -12,6 +12,9 @@
     "type": "git",
     "url": "https://github.com/zelzen/module-suite",
     "directory": "/rewrite-module"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "engines": {
     "node": ">=10"
