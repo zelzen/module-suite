@@ -14,7 +14,7 @@
     "directory": "/rewrite-module"
   },
   "engines": {
-    "node": "10"
+    "node": ">=10"
   },
   "scripts": {
     "dev": "rollup -c -w",
