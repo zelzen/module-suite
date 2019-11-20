@@ -1,7 +1,7 @@
 {
   "name": "@module-suite/test",
-  "version": "0.2.0",
-  "description": "Test your Microfrontend modules to ensure compatibility with Module CDN",
+  "version": "0.3.0",
+  "description": "Test your modules to ensure compatibility with Module Server",
   "main": "bin/testModule.js",
   "sideEffects": false,
   "homepage": "https://github.com/zelzen/module-suite",

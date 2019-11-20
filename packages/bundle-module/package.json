@@ -1,6 +1,6 @@
 {
   "name": "@module-suite/bundle",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Bundles a module in memory with Rollup",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
