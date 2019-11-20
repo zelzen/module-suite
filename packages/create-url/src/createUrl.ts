@@ -4,9 +4,13 @@ import semver from 'semver';
 import { ProxyOptions } from './models';
 
 /**
- * Creates an import for Module Server
+ * Creates an import url for Module Server
+ *
+ * @param moduleName - Name of module (npm package name)
+ * @param moduleVersion - Version of module. Can be a SEMVER range.
+ * @param options - Query and Path options for url
  */
-export default function createImport(
+export default function createUrl(
   moduleName: string,
   moduleVersion: string,
   { filePath, minify, host, output, transforms }: ProxyOptions

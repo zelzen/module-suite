@@ -1,3 +1,3 @@
-export { default as createImport } from './createImport';
-export { default as createDependencyImports } from './createDependencyImports';
+export { default as createUrl } from './createUrl';
+export { default as createDependencyUrls } from './createDependencyUrls';
 export * from './models';

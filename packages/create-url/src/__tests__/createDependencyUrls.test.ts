@@ -1,4 +1,4 @@
-import createDepImports from '../createDependencyImports';
+import createDepUrls from '../createDependencyUrls';
 
 const host = 'http://localhost:3030';
 
@@ -10,7 +10,7 @@ const deps = {
 };
 
 it('should create imports', () => {
-  const res = createDepImports(deps, { host });
+  const res = createDepUrls(deps, { host });
   expect(res).toMatchInlineSnapshot(`
     Object {
       "@module-suite/systemjs-loader": "http://localhost:3030/@module-suite/systemjs-loader@>2",
@@ -22,7 +22,7 @@ it('should create imports', () => {
 });
 
 it('should create imports from pathNames', () => {
-  const res = createDepImports(deps, {
+  const res = createDepUrls(deps, {
     host,
     filePaths: {
       react: '/cjs/react.production.min.js',
@@ -41,7 +41,7 @@ it('should create imports from pathNames', () => {
 });
 
 it('should should pass import options', () => {
-  const res = createDepImports(deps, {
+  const res = createDepUrls(deps, {
     host,
     transforms: ['imports', 'nodeenv'],
     minify: true,

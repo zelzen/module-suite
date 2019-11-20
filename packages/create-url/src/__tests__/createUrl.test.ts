@@ -1,15 +1,15 @@
-import createImport from '../createImport';
+import createUrl from '../createUrl';
 
 const host = 'http://localhost:3030';
 
 it('should create an import', () => {
-  const res = createImport('react', '16.11.0', { host });
+  const res = createUrl('react', '16.11.0', { host });
 
   expect(res).toBe(`${host}/react@16.11.0`);
 });
 
 it('should handle proxy options', () => {
-  const res = createImport('react', '16.11.0', {
+  const res = createUrl('react', '16.11.0', {
     minify: true,
     output: 'system',
     transforms: ['nodeenv', 'imports'],
@@ -20,7 +20,7 @@ it('should handle proxy options', () => {
 });
 
 it('should handle filePaths', () => {
-  const res = createImport('react', '16.11.0', {
+  const res = createUrl('react', '16.11.0', {
     filePath: '/cjs/react.production.min.js',
     host,
   });
@@ -29,7 +29,7 @@ it('should handle filePaths', () => {
 });
 
 it('should allow semver ranges', () => {
-  const res = createImport('react', '^16.11.0', {
+  const res = createUrl('react', '^16.11.0', {
     filePath: '/cjs/react.production.min.js',
     host,
   });
@@ -39,7 +39,7 @@ it('should allow semver ranges', () => {
 
 it('should error on invalid semver', () => {
   const res = () =>
-    createImport('react', '16.11.', {
+    createUrl('react', '16.11.', {
       filePath: '/cjs/react.production.min.js',
       host,
     });
@@ -48,7 +48,7 @@ it('should error on invalid semver', () => {
 });
 
 it('should pass "false" if no transforms are specified', () => {
-  const res = createImport('react', '16.11.0', {
+  const res = createUrl('react', '16.11.0', {
     transforms: [],
     host,
   });
@@ -57,7 +57,7 @@ it('should pass "false" if no transforms are specified', () => {
 });
 
 it('should ignore blank query options', () => {
-  const res = createImport('react', '16.11.0', {
+  const res = createUrl('react', '16.11.0', {
     transforms: undefined,
     filePath: undefined,
     output: undefined,
