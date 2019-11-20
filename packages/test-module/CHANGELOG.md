@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.1](https://github.com/zelzen/module-suite/compare/@module-suite/test@0.4.0...@module-suite/test@0.4.1) (2019-11-20)
+
+**Note:** Version bump only for package @module-suite/test
+
+
+
+
+
 # [0.4.0](https://github.com/zelzen/module-suite/compare/@module-suite/test@0.1.13...@module-suite/test@0.4.0) (2019-11-20)
 
 
