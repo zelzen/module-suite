@@ -1,10 +1,6 @@
 {
   "packages": [
-    "proxier",
-    "test-module",
-    "rewrite-module",
-    "bundle-module",
-    "systemjs-loader"
+    "packages/*"
   ],
   "version": "independent",
   "npmClient": "yarn",

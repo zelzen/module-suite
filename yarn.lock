@@ -1587,6 +1587,30 @@
     npmlog "^4.1.2"
     write-file-atomic "^2.3.0"
 
+"@module-suite/bundle@^0.3.3":
+  version "0.3.3"
+  resolved "https://registry.npmjs.org/@module-suite/bundle/-/bundle-0.3.3.tgz#c318b5023e729b05d845ab2c257f8feebd9dc60d"
+  integrity sha512-occaKTKX7u6bILUeCGsFIDOWeehLvGfs1ay9AgJyQforh5mNceRdUC8lIfhsn6OmiybyICq1RJld+XAh/Y/OJA==
+  dependencies:
+    "@module-suite/rewrite" "^0.4.2"
+    got "^9.6.0"
+    rollup "^1.25.2"
+    rollup-plugin-babel "^4.3.3"
+    rollup-plugin-terser "^5.1.2"
+
+"@module-suite/rewrite@^0.4.2":
+  version "0.4.2"
+  resolved "https://registry.npmjs.org/@module-suite/rewrite/-/rewrite-0.4.2.tgz#fb11fec85079594ba0147da4a88f306d1255a053"
+  integrity sha512-mP3N+TAHtd1knEOmcnRu+KAcKRSRn7kVAoVKQqalBUkuwFCrCF/vH9gQz6BQOav22rklkW5AFAKspytcg+vOQw==
+  dependencies:
+    "@babel/core" "^7.6.4"
+    "@babel/plugin-syntax-dynamic-import" "^7.2.0"
+    "@babel/plugin-transform-modules-systemjs" "^7.5.0"
+    "@babel/types" "^7.6.3"
+    "@zelz/babel-plugin-transform-commonjs" "^1.2.0"
+    babel-plugin-minify-dead-code-elimination "^0.5.1"
+    terser "^4.3.9"
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.npmjs.org/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"

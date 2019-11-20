@@ -2,11 +2,7 @@
   "name": "module-suite",
   "private": true,
   "workspaces": [
-    "proxier",
-    "test-module",
-    "rewrite-module",
-    "bundle-module",
-    "systemjs-loader"
+    "packages/*"
   ],
   "version": "1.0.0",
   "repository": {
