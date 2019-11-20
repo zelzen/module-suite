@@ -13,6 +13,9 @@
     "url": "https://github.com/zelzen/module-suite",
     "directory": "/packages/create-url"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "Gabe M <hey@gabe.mx>",
   "files": [
     "lib"
