@@ -69,6 +69,7 @@ Make sure this dependency is listed in the package.json
       extension({
         extensions,
       }),
+      // rollup-plugin-typescript can't resolve "baseUrl" from tsconfig. Using Babel instead.
       // typescript(),
       babel({
         rootMode: 'upward-optional',
@@ -110,7 +111,7 @@ Make sure this dependency is listed in the package.json
     configs.push(esmConfig);
   }
 
-  // Set the base config
+  // Expose the base config
   configs.base = baseConfig;
   // Return all configs
   return configs;
