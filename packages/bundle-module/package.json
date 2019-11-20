@@ -5,8 +5,9 @@
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
   "types": "lib/bundle-module/src/index.d.ts",
+  "sideEffects": false,
   "author": "Gabe M <hey@gabe.mx>",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "homepage": "https://github.com/zelzen/module-suite",
   "repository": {
     "type": "git",

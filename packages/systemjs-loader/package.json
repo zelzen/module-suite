@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
+  "sideEffects": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/zelzen/module-suite",
@@ -15,7 +16,7 @@
   "contributors": [
     "Gabe M <hey@gabe.mx>"
   ],
-  "license": "UNLICENSED",
+  "license": "MIT",
   "files": [
     "lib",
     "dist"

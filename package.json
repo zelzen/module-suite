@@ -12,11 +12,18 @@
   "contributors": [
     "Gabe Meola <hey@gabe.mx>"
   ],
-  "license": "UNLICENSED",
+  "license": "MIT",
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "modulePathIgnorePatterns": [
+      "<rootDir>/lib/"
+    ]
+  },
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "build": "lerna run build",
-    "test": "echo 'no tests yet :('",
+    "test": "jest",
     "lint": "eslint \"./**/*.{ts,js}\"",
     "lint:fix": "yarn lint --fix",
     "release": "lerna publish --yes --conventional-commits",
@@ -44,6 +51,7 @@
     "rollup-plugin-json": "4.0.0",
     "rollup-plugin-replace": "2.2.0",
     "rollup-typescript": "1.2.1",
+    "ts-jest": "^24.1.0",
     "typescript": "3.7.2"
   }
 }

@@ -2,18 +2,19 @@
   "name": "@module-suite/test",
   "version": "0.2.0",
   "description": "Test your Microfrontend modules to ensure compatibility with Module CDN",
+  "main": "bin/testModule.js",
+  "sideEffects": false,
   "homepage": "https://github.com/zelzen/module-suite",
   "repository": {
     "type": "git",
     "url": "https://github.com/zelzen/module-suite",
     "directory": "/packages/test-module"
   },
-  "main": "bin/testModule.js",
   "author": "Gabe M <hey@gabe.mx>",
   "publishConfig": {
     "access": "public"
   },
-  "license": "UNLICENSED",
+  "license": "MIT",
   "bin": {
     "module-test": "./bin/testModule.js"
   },

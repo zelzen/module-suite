@@ -1,0 +1,37 @@
+{
+  "name": "@module-suite/create-url",
+  "version": "0.1.0",
+  "description": "Creates import urls for Module Server / Proxier",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "module": "lib/index.esm.js",
+  "types": "lib/create-url/src/index.d.ts",
+  "sideEffects": false,
+  "homepage": "https://github.com/zelzen/module-suite",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zelzen/module-suite",
+    "directory": "/packages/create-url"
+  },
+  "author": "Gabe M <hey@gabe.mx>",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "dev": "rollup -c -w",
+    "build": "yarn clean && yarn build:ts && yarn build:types",
+    "build:ts": "NODE_ENV=production rollup -c",
+    "build:types": "tsc -p . --emitDeclarationOnly",
+    "test": "jest",
+    "lint": "eslint .",
+    "clean": "rm -rf lib/"
+  },
+  "dependencies": {
+    "qs": "^6.9.0",
+    "semver": "^6.3.0"
+  },
+  "devDependencies": {
+    "@types/qs": "^6.5.3",
+    "@types/semver": "^6.2.0"
+  }
+}

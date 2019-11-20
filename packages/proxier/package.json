@@ -4,6 +4,7 @@
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
   "types": "lib/proxier/src/index.d.ts",
+  "sideEffects": false,
   "homepage": "https://github.com/zelzen/module-suite",
   "repository": {
     "type": "git",
@@ -17,7 +18,7 @@
     "lib"
   ],
   "author": "Gabe Meola <hey@gabe.mx>",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "start": "NODE_ENV=production node lib/index.js",
     "start:watch": "NODE_ENV=development nodemon --on-change-only --watch lib/index.js --exec \"node --inspect\" lib/index.js",

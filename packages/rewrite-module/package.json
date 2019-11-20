@@ -6,7 +6,7 @@
   "module": "lib/index.esm.js",
   "types": "lib/rewrite-module/src/index.d.ts",
   "author": "Gabe M <hey@gabe.mx>",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "homepage": "https://github.com/zelzen/module-suite",
   "repository": {
     "type": "git",

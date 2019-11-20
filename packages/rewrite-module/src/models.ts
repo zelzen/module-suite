@@ -1,8 +1,7 @@
 import { PluginItem } from '@babel/core';
 import { Dependencies } from 'shared/models/packageJson';
+import { OutputType, TransformType } from 'shared/models/options';
 
-export type OutputType = 'source' | 'esm' | 'system';
-export type TransformType = 'nodeenv' | 'imports' | 'deadcode';
 export type Transforms = Set<TransformType>;
 
 export type Context = {
