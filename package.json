@@ -26,7 +26,7 @@
     "test": "jest",
     "lint": "eslint \"./**/*.{ts,js}\"",
     "lint:fix": "yarn lint --fix",
-    "release": "lerna publish --yes --conventional-commits",
+    "release": "lerna publish --yes --conventional-commits --registry https://registry.npmjs.org/",
     "releasexx": "lerna publish --yes --conventional-commits --create-release github"
   },
   "devDependencies": {

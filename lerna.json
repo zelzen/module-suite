@@ -7,8 +7,8 @@
   "useWorkspaces": true,
   "command": {
     "publish": {
-      "ignoreChanges": ["*.md", "*.mdx"],
-      "message": "chore(release): ",
+      "ignoreChanges": ["*.md", "*.test.*", "**/__tests__/**", ".gitignore", "*.html"],
+      "message": "chore(release): publish",
       "push": false
     }
   }
