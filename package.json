@@ -43,7 +43,7 @@
     "eslint": "6.6.0",
     "jest": "24.9.0",
     "lerna": "3.18.4",
-    "nodemon": "1.19.4",
+    "nodemon": "2.0.1",
     "prettier": "1.19.1",
     "rollup": "1.27.2",
     "rollup-plugin-babel": "4.3.3",
