@@ -25,6 +25,7 @@ const transformOptions: TransformOptions = {
       // that the call is pure and _could_ be
       // removed with no side effects.
       comment === '#__PURE__' ||
+      comment === '@__PURE__' ||
       // Keep @preserve comments
       comment.includes('@preserve')
     ) {
@@ -72,12 +73,12 @@ export default async function rewriteModule(code: string, context: Context) {
     } catch (err) {
       // Log error and return the babel transformed code
       // Babel has already done some minification.
-      console.error(`Terser error minifing ${context.packageName}@${context.packageVersion}`, err);
+      console.error(`Terser error minifying ${context.packageName}@${context.packageVersion}`, err);
     }
   }
 
   return {
     code: transformedCode,
-    warnings: ['Big ol warning'],
+    warnings: [],
   };
 }
