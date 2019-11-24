@@ -1,7 +1,7 @@
-import { dirname, normalize } from 'path';
+import { dirname } from 'path';
 import { ParserOptions } from '@babel/core';
-// import semver from 'semver';
 import { StringLiteral, Identifier } from '@babel/types';
+import { createUrl } from '@module-suite/create-url';
 import parsePackageUrl from 'shared/utils/packageJson/parsePackageUrl';
 import isLocalIdentifier from 'shared/utils/isLocalIdentifier';
 import { Context, Transformer } from '../models';
@@ -21,14 +21,8 @@ function rewriteValue(
     throw `[AST] Unable to parse import declaration: "${importFilePath}". Imported from ${packageName}@${packageVersion}`;
   }
 
-  // Add protocal if it doesn't exist
-  const basePath = host.startsWith('http') ? host : `https://${host}`;
-  // Pass along query params
-  let queryParams = '';
   // TODO: Source is the default but this module wouldn't know that.
-  if (output !== 'source') queryParams += `output=${output}`;
-  // Add query question mark
-  if (queryParams.length !== 0) queryParams = `?${queryParams}`;
+  const importOutput = output === 'source' ? undefined : output;
 
   // Local imports
   if (isLocalIdentifier(node.value)) {
@@ -38,14 +32,16 @@ function rewriteValue(
     // directory, set it to an empty string.
     importDir = importDir === '.' || importDir === '/' ? '' : `/${importDir}`;
 
-    node.value =
-      basePath +
-      normalize(`/${packageName}@${packageVersion}${importDir}/${importFilePath}${queryParams}`);
+    node.value = createUrl(packageName, packageVersion, {
+      host,
+      filePath: `${importDir}/${importFilePath}`,
+      output: importOutput,
+    });
   }
   // External Package Imports
   else {
-    const { packageName: importedPackageName, fileName } = importedModule;
-    let importedModuleVersion = dependencies[importedPackageName];
+    const { packageName: importedModuleName, fileName } = importedModule;
+    let importedModuleVersion = dependencies[importedModuleName];
     if (importedModuleVersion == null) {
       // Change to any support any version
       // While it would be nice for every package to have proper package.json dependencies,
@@ -55,16 +51,18 @@ function rewriteValue(
       // Would make it easy to catch with CI
       // e.g. x-proxy-warnings: ...
       console.warn(
-        `[AST] Imported Module "${importedPackageName}" not listed as a dependency or peerDependency`
+        `[AST] Imported Module "${importedModuleName}" not listed as a dependency or peerDependency`
       );
     }
     // TODO: What should we do if semver range is complex?
     // e.g. "1.x || >=2.5.0 || 5.0.0 - 7.2.3"
     // Maybe url encode it and allow the redirect semver range resolver handle it?
 
-    node.value =
-      basePath +
-      normalize(`/${importedPackageName}@${importedModuleVersion}${fileName}${queryParams}`);
+    node.value = createUrl(importedModuleName, importedModuleVersion, {
+      host,
+      filePath: fileName,
+      output: importOutput,
+    });
   }
 }
 
