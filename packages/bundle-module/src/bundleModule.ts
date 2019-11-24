@@ -98,7 +98,7 @@ export default async function bundleModule(
       },
     });
 
-    return output;
+    return output[0].code;
   } catch (err) {
     console.log('[bundle-module] An error occurred while bundling.');
     console.error(err);
