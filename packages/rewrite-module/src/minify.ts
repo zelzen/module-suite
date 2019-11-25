@@ -4,15 +4,15 @@ const terserOptions: MinifyOptions = {
   module: true,
   // Compress Options
   // See: https://terser.org/docs/api-reference#compress-options
-  compress: {
-    ecma: 8,
-    // Keep booleans as boolean values (true | false)
-    // instead of (1 | 0)
-    booleans_as_integers: false,
-  },
+  // compress: {
+  //   ecma: 8,
+  //   // Keep booleans as boolean values (true | false)
+  //   // instead of (1 | 0)
+  //   booleans_as_integers: false,
+  // },
   // Terser Minify "Fast Mode"
   // https://terser.org/docs/api-reference#terser-fast-minify-mode
-  // compress: false,
+  compress: false,
   // Mangle Options
   // See: https://terser.org/docs/api-reference#mangle-options
   mangle: {
