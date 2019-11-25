@@ -69,6 +69,7 @@ export default async function rewriteModule(code: string, context: Context) {
 
   if (context.shouldMinify) {
     try {
+      // TODO: Add timeout for 60 seconds for minification
       transformedCode = minify(result.code);
     } catch (err) {
       // Log error and return the babel transformed code
