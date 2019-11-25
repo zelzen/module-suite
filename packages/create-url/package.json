@@ -1,6 +1,6 @@
 {
   "name": "@module-suite/create-url",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Creates import urls for Module Server / Proxier",
   "license": "MIT",
   "main": "lib/index.js",
