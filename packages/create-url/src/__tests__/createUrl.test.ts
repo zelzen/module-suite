@@ -66,3 +66,21 @@ it('should ignore blank query options', () => {
 
   expect(res).toBe(`${host}/react@16.11.0`);
 });
+
+it('should omit "output" is "source" is passed', () => {
+  const res = createUrl('react', '16.11.0', {
+    output: 'source',
+    host,
+  });
+
+  expect(res).toBe(`${host}/react@16.11.0`);
+});
+
+it('should allow transforms=false', () => {
+  const res = createUrl('react', '16.11.0', {
+    transforms: false,
+    host,
+  });
+
+  expect(res).toBe(`${host}/react@16.11.0?transforms=false`);
+});
