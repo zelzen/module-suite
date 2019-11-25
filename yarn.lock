@@ -8535,10 +8535,10 @@ symbol-tree@^3.2.2:
   resolved "https://registry.npmjs.org/symbol-tree/-/symbol-tree-3.2.4.tgz#430637d248ba77e078883951fb9aa0eed7c63fa2"
   integrity sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw==
 
-systemjs@6.1.4:
-  version "6.1.4"
-  resolved "https://registry.yarnpkg.com/systemjs/-/systemjs-6.1.4.tgz#a51049341b0a8d3d85ad4d9be65060508786335a"
-  integrity sha512-cFaMv91IpjxfsRvaqnUpWlCYy2kNsTHJyKZB25X393+AaZBAyGZdUU/gWZnlIW/mEd5a5ymsOm7X2IEMYdo37g==
+systemjs@6.1.5:
+  version "6.1.5"
+  resolved "https://registry.yarnpkg.com/systemjs/-/systemjs-6.1.5.tgz#9bdc6ed447cbb0173bc466f415b19f0a8ba2865d"
+  integrity sha512-/GKRr2FfyL2zP8ztAe59nmys/cPwgwJlPbylmkKm8cetCe5xWLBPkjw18I04wMomjciZxKXwO8pzgA8VesIflA==
 
 table@^5.2.3:
   version "5.4.6"
