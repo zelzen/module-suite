@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.4](https://github.com/zelzen/module-suite/compare/@module-suite/rewrite@0.7.3...@module-suite/rewrite@0.7.4) (2019-11-25)
+
+**Note:** Version bump only for package @module-suite/rewrite
+
+
+
+
+
 ## [0.7.3](https://github.com/zelzen/module-suite/compare/@module-suite/rewrite@0.7.2...@module-suite/rewrite@0.7.3) (2019-11-25)
 
 **Note:** Version bump only for package @module-suite/rewrite
