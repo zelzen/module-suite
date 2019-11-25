@@ -5,5 +5,6 @@ export type ProxyOptions = {
   host: string;
   minify?: boolean;
   output?: OutputType;
-  transforms?: Array<TransformType>;
+  /** Which transforms to perform. Set to false to disable all transforms */
+  transforms?: Array<TransformType> | false;
 };

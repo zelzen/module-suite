@@ -13,10 +13,6 @@ import { ProxyOptions } from './models';
 export default function createUrl(
   moduleName: string,
   moduleVersion: string,
-  // TODO: Default transforms to true.
-  // TODO: Default output to source
-  // TODO: Default minify to true
-  // TODO: Default filePath to empty string
   { filePath, minify, host, output, transforms }: ProxyOptions
 ) {
   if (!host || host.startsWith('http') === false) {
@@ -34,10 +30,10 @@ export default function createUrl(
   const queryParams = qs.stringify(
     {
       minify,
-      output,
-      // TODO: Allow transforms: true for transforms
+      // "source" is the default
+      output: output === 'source' ? undefined : output,
       // Pass `transforms=false` if an empty Array is specified.
-      transforms: transforms != null && transforms.length === 0 ? false : transforms,
+      transforms: !!transforms && transforms.length === 0 ? false : transforms,
     },
     { arrayFormat: 'comma' }
   );
