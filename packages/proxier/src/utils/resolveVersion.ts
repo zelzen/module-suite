@@ -1,5 +1,5 @@
 import semver from 'semver';
-import fetchManifest from './fetchManifest';
+import { Manifest } from './fetchManifest';
 
 export class VersionNotFoundError extends Error {
   name = 'VersionNotFoundError';
@@ -9,22 +9,16 @@ export class VersionNotFoundError extends Error {
 }
 
 /**
- * Fetches matching version from package manifest.
+ * Resolves matching version from package manifest.
  * If version range, fetches the highest satisfying version.
  * If exact version, returns that exact version if exists in manifest.
  * If dist-tag such as "latest", returns the pointer version.
  * Version "*" will resolve to latest.
  *
- * @param registryUrl - Url of NPM-like registry
- * @param pkgName - Name of package to fetch
+ * @param manifest - Package manifest
  * @param version - Version specifier. Can be a range, dist-tag, or exact version
  */
-export default async function fetchVersion(
-  registryUrl: string,
-  pkgName: string,
-  version: string
-): Promise<string> {
-  const manifest = await fetchManifest(registryUrl, pkgName);
+export default function resolveVersion(manifest: Manifest, version: string): string {
   const { versions } = manifest;
   const distTags = manifest['dist-tags'];
 
@@ -48,7 +42,7 @@ export default async function fetchVersion(
   const versionsList = Object.keys(manifest.versions);
   const maxSatisfying = semver.maxSatisfying(versionsList, version);
   if (maxSatisfying == null) {
-    throw new VersionNotFoundError(pkgName, version);
+    throw new VersionNotFoundError(manifest.name, version);
   }
 
   return maxSatisfying;

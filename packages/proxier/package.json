@@ -20,16 +20,10 @@
   "author": "Gabe Meola <hey@gabe.mx>",
   "license": "MIT",
   "scripts": {
-    "start": "NODE_ENV=production node lib/index.js",
-    "start:watch": "NODE_ENV=development nodemon --on-change-only --watch lib/index.js --exec \"node --inspect\" lib/index.js",
-    "test": "echo 'no tests yet :('",
-    "lint": "eslint \"./**/*.{ts,js}\"",
-    "lint:fix": "yarn lint --fix",
-    "dev": "concurrently -i -p '[{name}]' -n 'Server,Build ' -c 'bgBlue.bold,bgMagenta.bold' 'yarn start:watch' 'yarn build:watch'",
+    "dev": "NODE_ENV=development rollup -c -w",
     "build": "rm -rf lib/ && yarn build:js && yarn build:types",
     "build:js": "NODE_ENV=production rollup -c",
     "build:types": "tsc -p . --emitDeclarationOnly",
-    "build:watch": "NODE_ENV=development rollup -c -w",
     "clean": "rm -rf lib/"
   },
   "engines": {

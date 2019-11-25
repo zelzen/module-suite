@@ -6,10 +6,12 @@ import bundleModule from '@module-suite/bundle';
 import getAllDependencies from 'shared/utils/packageJson/getAllProdDependencies';
 import parsePackageUrl from 'shared/utils/packageJson/parsePackageUrl';
 import parsePackageJson from 'shared/utils/packageJson/parsePackageJson';
+import isExactSemver from 'shared/utils/semver/isExact';
 import { OutputType, TransformType } from 'shared/models/options';
-import findPackageTarFile from './utils/findPackageTarFile';
+import resolveVersionTarFile from './utils/resolveVersionTarFile';
 import downloadPackage from './utils/downloadPackage';
-import fetchVersion from './utils/fetchVersion';
+import resolveVersion from './utils/resolveVersion';
+import fetchManifest from './utils/fetchManifest';
 import { createEtag, isFresh } from './utils/etag';
 import bundlingSupported from './utils/bundlingSupported';
 import { defaultRegistryUrl } from './constants';
@@ -89,54 +91,59 @@ export default async function proxyModule(
     return;
   }
 
-  // TODO: No need to search if exact version is passed
-  try {
-    const resolvedVersion = await fetchVersion(registryUrl, packageName, packageVersion);
-    // Redirect if the resolved version is different.
-    // A redirect won't occur if the requested version is exact.
-    if (resolvedVersion !== packageVersion) {
-      // Cache redirect for 20 minutes.
-      // This is how long it will take for a
-      // package release to propagate out.
-      // reply.header('Cache-Control', 'public, max-age=1200');
-      // TODO: Play with this setting.
-      // For active development I'm setting this to 3 hours
-      res.setHeader('Cache-Control', 'public, max-age=10800');
-      // Redirect to a definite resource url
-      // so it the url can be immutably cached.
-      // e.g. `react@^16.8.6 => react@16.8.6`
-      //
-      // TODO: This causes infinite redirects for
-      // a url like `/react` since `@latest` is missing from url.
-      // Should probably just rebuild the url instead of replacing.
-      res.statusCode = 302;
-      res.setHeader(
-        'Location',
-        url.replace(
-          // packageVersion will be url encoded "^16.8.6" => "%5E16.8.6"
-          encodeURI(packageVersion),
-          resolvedVersion
-        )
+  const manifest = fetchManifest(registryUrl, packageName);
+
+  // No need to search if exact version is passed
+  if (isExactSemver(packageVersion) === false) {
+    try {
+      // Resolves a semver range to an exact version
+      const resolvedVersion = resolveVersion(await manifest, packageVersion);
+      // Redirect if the resolved version is different.
+      // A redirect won't occur if the requested version is exact.
+      if (resolvedVersion !== packageVersion) {
+        // Cache redirect for 20 minutes.
+        // This is how long it will take for a
+        // package release to propagate out.
+        // reply.header('Cache-Control', 'public, max-age=1200');
+        // TODO: Play with this setting.
+        // For active development I'm setting this to 3 hours
+        res.setHeader('Cache-Control', 'public, max-age=10800');
+        // Redirect to a definite resource url
+        // so it the url can be immutably cached.
+        // e.g. `react@^16.8.6 => react@16.8.6`
+        //
+        // TODO: This causes infinite redirects for
+        // a url like `/react` since `@latest` is missing from url.
+        // Should probably just rebuild the url instead of replacing.
+        res.statusCode = 302;
+        res.setHeader(
+          'Location',
+          url.replace(
+            // packageVersion will be url encoded "^16.8.6" => "%5E16.8.6"
+            encodeURI(packageVersion),
+            resolvedVersion
+          )
+        );
+        res.end();
+        return;
+      }
+    } catch (err) {
+      console.error('Error resolving version for:', url, err);
+      res.statusCode = 400;
+      res.end(
+        JSON.stringify({
+          statusCode: 400,
+          error: 'Invalid semver version',
+          message: `Requested semver version "${packageVersion}" is invalid`,
+        })
       );
-      res.end();
       return;
     }
-  } catch (err) {
-    console.error('Error resolving version for:', url, err);
-    res.statusCode = 400;
-    res.end(
-      JSON.stringify({
-        statusCode: 400,
-        error: 'Invalid semver version',
-        message: `Requested semver version "${packageVersion}" is invalid`,
-      })
-    );
-    return;
   }
 
   try {
-    // TODO: Catch manifest fetching
-    const tarFileUrl = await findPackageTarFile(registryUrl, packageName, packageVersion);
+    const tarFileUrl = resolveVersionTarFile(await manifest, packageVersion);
+    // TODO: Cache tarball download
     const packageJson = downloadPackage(tarFileUrl, 'package.json').then((entry) => {
       return parsePackageJson(entry.content.toString());
     });
@@ -206,9 +213,14 @@ export default async function proxyModule(
     }
 
     // TODO: Use previously downloaded tarfile
-    const fileContent = downloadPackage(tarFileUrl, fileName).then((entry) => {
-      return entry.content.toString();
-    });
+    const fileContent = downloadPackage(tarFileUrl, fileName)
+      .then((entry) => {
+        return entry.content.toString();
+      })
+      .catch((err) => {
+        // Re-throw error
+        throw err;
+      });
 
     // Set file content-type.
     res.setHeader('Content-Type', mimeType);
@@ -241,12 +253,15 @@ export default async function proxyModule(
       bundlingSupported(fileName, outputModuleType)
     ) {
       console.log(`Attempting to bundle "${packageName}@${packageVersion}`);
+      // Await code outisde of try / catch to
+      // avoid error from being swallowed.
+      const code = await fileContent;
       try {
         // TODO: This only works with output='esm' currently since
         // rewriteModule rewrites all external imports too.
         // bundle-module probably needs to consume rewrite-module
         // with plain code from registry being passed in.
-        const [bundle] = await bundleModule(await fileContent, {
+        const [bundle] = await bundleModule(code, {
           host,
           packageName,
           packageVersion,
@@ -295,7 +310,7 @@ export default async function proxyModule(
       JSON.stringify({
         statusCode: 500,
         error: 'Internal Server Error',
-        message: err,
+        message: err.message,
       })
     );
   }
