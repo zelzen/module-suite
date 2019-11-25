@@ -27,22 +27,13 @@
     "build:types": "tsc -p . --emitDeclarationOnly"
   },
   "dependencies": {
-    "@module-suite/rewrite": "^0.4.2",
+    "@module-suite/rewrite": "^0.7.1",
     "got": "^9.6.0",
     "rollup": "^1.25.2",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-terser": "^5.1.2"
   },
   "devDependencies": {
-    "@babel/core": "7.7.2",
-    "@babel/plugin-transform-typescript": "7.7.2",
-    "@babel/preset-env": "7.7.1",
-    "@types/got": "9.6.9",
-    "@types/jest": "24.0.23",
-    "concurrently": "5.0.0",
-    "lerna": "3.18.4",
-    "nodemon": "2.0.1",
-    "rollup": "1.27.2",
-    "typescript": "3.7.2"
+    "@types/got": "9.6.9"
   }
 }

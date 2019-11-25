@@ -1,11 +1,12 @@
 import { extname } from 'path';
 import { IncomingMessage, ServerResponse } from 'http';
 import mimeTypes from 'mime-types';
-import rewriteModule, { OutputType, TransformType } from '@module-suite/rewrite';
+import rewriteModule from '@module-suite/rewrite';
 import bundleModule from '@module-suite/bundle';
 import getAllDependencies from 'shared/utils/packageJson/getAllProdDependencies';
 import parsePackageUrl from 'shared/utils/packageJson/parsePackageUrl';
 import parsePackageJson from 'shared/utils/packageJson/parsePackageJson';
+import { OutputType, TransformType } from 'shared/models/options';
 import findPackageTarFile from './utils/findPackageTarFile';
 import downloadPackage from './utils/downloadPackage';
 import fetchVersion from './utils/fetchVersion';
@@ -255,8 +256,8 @@ export default async function proxyModule(
           format: outputModuleType,
         });
 
-        if (bundle.code) {
-          transformedCode = bundle.code;
+        if (bundle) {
+          transformedCode = bundle;
         }
       } catch (err) {
         console.log(`Unable to bundle code for ${packageName} @ v${packageVersion}`, err);

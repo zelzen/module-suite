@@ -1,6 +1,8 @@
 import { PluginItem } from '@babel/core';
 import { Dependencies } from 'shared/models/packageJson';
-import { OutputType, TransformType } from 'shared/models/options';
+
+type OutputType = import('shared/models/options').OutputType;
+type TransformType = import('shared/models/options').TransformType;
 
 export type Transforms = Set<TransformType>;
 
@@ -24,3 +26,4 @@ export type Context = {
 };
 
 export type Transformer = (context: Context) => PluginItem;
+export { OutputType, TransformType };

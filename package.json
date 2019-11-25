@@ -17,7 +17,11 @@
     "preset": "ts-jest",
     "testEnvironment": "node",
     "modulePathIgnorePatterns": [
-      "<rootDir>/lib/"
+      "<rootDir>/lib/",
+      "<rootDir>/dist/"
+    ],
+    "modulePaths": [
+      "<rootDir>/packages"
     ]
   },
   "scripts": {
