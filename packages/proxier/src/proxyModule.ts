@@ -121,7 +121,6 @@ export default async function proxyModule(
           transforms: transforms.length === defaultTransforms.length ? undefined : transforms,
         })
       );
-      res.end();
       return;
     }
   } catch (err) {

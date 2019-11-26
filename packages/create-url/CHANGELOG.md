@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.5](https://github.com/zelzen/module-suite/compare/@module-suite/create-url@0.3.4...@module-suite/create-url@0.3.5) (2019-11-26)
+
+
+### Bug Fixes
+
+* **create-url:** allow transforms: false ([c441e67](https://github.com/zelzen/module-suite/commit/c441e67b47dfa0d1b0ba2c73cdd9ca2b410e1e78))
+
+
+
+
+
 ## [0.3.4](https://github.com/zelzen/module-suite/compare/@module-suite/create-url@0.3.3...@module-suite/create-url@0.3.4) (2019-11-25)
 
 
