@@ -6,6 +6,11 @@ import { getRegistry as get } from './request/agents';
 export type AbbreviatedPackageJson = {
   name: PackageJson['name'];
   version: PackageJson['version'];
+  sideEffects: PackageJson['sideEffects'];
+  main: PackageJson['main'];
+  module: PackageJson['module'];
+  browser: PackageJson['browser'];
+  unpkg: PackageJson['unpkg'];
   deprecated: PackageJson['deprecated'];
   dependencies: PackageJson['dependencies'];
   devDependencies: PackageJson['devDependencies'];
