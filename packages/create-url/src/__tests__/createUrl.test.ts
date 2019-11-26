@@ -37,16 +37,6 @@ it('should allow semver ranges', () => {
   expect(res).toBe(`${host}/react@^16.11.0/cjs/react.production.min.js`);
 });
 
-it('should error on invalid semver', () => {
-  const res = () =>
-    createUrl('react', '16.11.', {
-      filePath: '/cjs/react.production.min.js',
-      host,
-    });
-
-  expect(res).toThrow();
-});
-
 it('should pass "false" if no transforms are specified', () => {
   const res = createUrl('react', '16.11.0', {
     transforms: [],
@@ -83,4 +73,12 @@ it('should allow transforms=false', () => {
   });
 
   expect(res).toBe(`${host}/react@16.11.0?transforms=false`);
+});
+
+it('should allow latest dist tag', () => {
+  const res = createUrl('react', 'latest', {
+    host,
+  });
+
+  expect(res).toBe(`${host}/react@latest`);
 });

@@ -1836,7 +1836,7 @@
   dependencies:
     "@types/node" "*"
 
-"@types/semver@6.2.0", "@types/semver@^6.0.2", "@types/semver@^6.2.0":
+"@types/semver@6.2.0", "@types/semver@^6.0.2":
   version "6.2.0"
   resolved "https://registry.npmjs.org/@types/semver/-/semver-6.2.0.tgz#d688d574400d96c5b0114968705366f431831e1a"
   integrity sha512-1OzrNb4RuAzIT7wHSsgZRlMBlNsJl+do6UblR7JMW4oB7bbR+uBEYtUh7gEc/jM84GGilh68lSOokyM/zNUlBA==

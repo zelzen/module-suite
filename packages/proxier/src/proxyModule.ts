@@ -1,11 +1,11 @@
 import { extname } from 'path';
 import { IncomingMessage, ServerResponse } from 'http';
 import mimeTypes from 'mime-types';
+import { createUrl } from '@module-suite/create-url';
 import rewriteModule from '@module-suite/rewrite';
 import bundleModule from '@module-suite/bundle';
 import getAllDependencies from 'shared/utils/packageJson/getAllProdDependencies';
 import parsePackageUrl from 'shared/utils/packageJson/parsePackageUrl';
-import isExactSemver from 'shared/utils/semver/isExact';
 import { OutputType, TransformType } from 'shared/models/options';
 import resolveVersionTarFile from './utils/resolveVersionTarFile';
 import resolveVersion from './utils/resolveVersion';
@@ -16,23 +16,25 @@ import bundlingSupported from './utils/bundlingSupported';
 import { defaultRegistryUrl } from './constants';
 
 type Query = {
-  minify: boolean;
-  bundle: boolean;
-  output: OutputType;
-  transforms: Array<TransformType>;
+  minify?: boolean;
+  bundle?: boolean;
+  output?: OutputType;
+  transforms?: Array<TransformType>;
 };
 
 type Options = {
   host: string;
-  query: Query;
+  query?: Query;
   /* Fully qualified url of an NPM or compatible registry. Defaults to yarn registry */
   registry?: string;
 };
 
+const defaultTransforms = ['nodeenv', 'imports', 'deadcode'] as Array<TransformType>;
+
 export default async function proxyModule(
   req: IncomingMessage,
   res: ServerResponse,
-  { host, query, registry: registryUrl = defaultRegistryUrl }: Options
+  { host, query = {}, registry: registryUrl = defaultRegistryUrl }: Options
 ) {
   const url = req.url as string;
 
@@ -70,10 +72,10 @@ export default async function proxyModule(
   const isEntryModuleSpecifier = fileName === '';
 
   const {
-    minify: shouldMinify,
-    bundle: bundlingRequested,
-    output: outputModuleType,
-    transforms,
+    minify: shouldMinify = true,
+    bundle: bundlingRequested = false,
+    output: outputModuleType = 'source',
+    transforms = defaultTransforms,
   } = query;
 
   // Create a weak etag from package declaration and defaults
@@ -92,52 +94,46 @@ export default async function proxyModule(
 
   const manifest = await fetchManifest(registryUrl, packageName);
 
-  // No need to search if exact version is passed
-  if (isExactSemver(packageVersion) === false) {
-    try {
-      // Resolves a semver range to an exact version
-      const resolvedVersion = resolveVersion(manifest, packageVersion);
-      // Redirect if the resolved version is different.
-      // A redirect won't occur if the requested version is exact.
-      if (resolvedVersion !== packageVersion) {
-        // Cache redirect for 20 minutes.
-        // This is how long it will take for a
-        // package release to propagate out.
-        // reply.header('Cache-Control', 'public, max-age=1200');
-        // TODO: Play with this setting.
-        // For active development I'm setting this to 3 hours
-        res.setHeader('Cache-Control', 'public, max-age=10800');
-        // Redirect to a definite resource url
-        // so it the url can be immutably cached.
-        // e.g. `react@^16.8.6 => react@16.8.6`
-        //
-        // TODO: This causes infinite redirects for
-        // a url like `/react` since `@latest` is missing from url.
-        // Should probably just rebuild the url instead of replacing.
-        res.statusCode = 302;
-        res.setHeader(
-          'Location',
-          url.replace(
-            // packageVersion will be url encoded "^16.8.6" => "%5E16.8.6"
-            encodeURI(packageVersion),
-            resolvedVersion
-          )
-        );
-        res.end();
-        return;
-      }
-    } catch (err) {
-      console.error('Error resolving version for:', url, err);
-      res.statusCode = 400;
-      res.end(
-        JSON.stringify({
-          statusCode: 400,
-          error: 'Invalid semver version',
-          message: `Requested semver version "${packageVersion}" is invalid`,
+  try {
+    // Resolves a semver range to an exact version
+    const resolvedVersion = resolveVersion(manifest, packageVersion);
+    // Redirect if the resolved version is different.
+    // A redirect won't occur if the requested version is exact.
+    if (resolvedVersion !== packageVersion) {
+      // Cache redirect for 20 minutes.
+      // This is how long it will take for a
+      // package release to propagate out.
+      // reply.header('Cache-Control', 'public, max-age=1200');
+      // TODO: Play with this setting.
+      // For active development I'm setting this to 3 hours
+      res.setHeader('Cache-Control', 'public, max-age=10800');
+      // Redirect to a definite resource url
+      // so it the url can be immutably cached.
+      // e.g. `react@^16.8.6 => react@16.8.6`
+      res.statusCode = 302;
+      res.setHeader(
+        'Location',
+        createUrl(packageName, resolvedVersion, {
+          host,
+          filePath: fileName,
+          minify: shouldMinify === true ? undefined : false,
+          output: outputModuleType,
+          transforms: transforms.length === defaultTransforms.length ? undefined : transforms,
         })
       );
       return;
     }
+  } catch (err) {
+    console.error('Error resolving version for:', url, err);
+    res.statusCode = 400;
+    res.end(
+      JSON.stringify({
+        statusCode: 400,
+        error: 'Invalid semver version',
+        message: `Requested semver version "${packageVersion}" is invalid`,
+      })
+    );
+    return;
   }
 
   try {
@@ -248,7 +244,7 @@ export default async function proxyModule(
       bundlingSupported(fileName, outputModuleType)
     ) {
       console.log(`Attempting to bundle "${packageName}@${packageVersion}`);
-      // Await code outisde of try / catch to
+      // Await code outside of try / catch to
       // avoid error from being swallowed.
       const code = await fileContent;
       try {
