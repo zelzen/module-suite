@@ -30,11 +30,9 @@
     "clean": "rm -rf lib/"
   },
   "dependencies": {
-    "qs": "^6.9.0",
-    "semver": "^6.3.0"
+    "qs": "^6.9.0"
   },
   "devDependencies": {
-    "@types/qs": "^6.5.3",
-    "@types/semver": "^6.2.0"
+    "@types/qs": "^6.5.3"
   }
 }
