@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/zelzen/module-suite/compare/@module-suite/create-url@0.3.5...@module-suite/create-url@0.4.0) (2019-11-26)
+
+
+### Bug Fixes
+
+* **create-url:** allow transforms: false ([b6c6d6d](https://github.com/zelzen/module-suite/commit/b6c6d6d0ed68ee999103f7ca41a9a3aec10e5983))
+
+
+### Features
+
+* allow any module version such as dist-tags ([8122ef0](https://github.com/zelzen/module-suite/commit/8122ef08fccfc79d638383b433ca124ab4b92daa))
+
+
+
+
+
 ## [0.3.5](https://github.com/zelzen/module-suite/compare/@module-suite/create-url@0.3.4...@module-suite/create-url@0.3.5) (2019-11-26)
 
 

@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.6](https://github.com/zelzen/module-suite/compare/@module-suite/proxier@0.9.5...@module-suite/proxier@0.9.6) (2019-11-26)
+
+
+### Bug Fixes
+
+* **proxier:** support versionless resolutions ([dd774fb](https://github.com/zelzen/module-suite/commit/dd774fb947b52da6b2817d57c2b8707495bf5244))
+
+
+### Performance Improvements
+
+* **proxier:** cache package manifest fetching ([e4e5582](https://github.com/zelzen/module-suite/commit/e4e55824f56b95c315f55ff1a794861f1e927c81))
+* **proxier:** use manifest instead of fetching package.json file ([401fcc7](https://github.com/zelzen/module-suite/commit/401fcc744904b79da344a5311dddd2556cf28d2e))
+
+
+
+
+
 ## [0.9.5](https://github.com/zelzen/module-suite/compare/@module-suite/proxier@0.9.4...@module-suite/proxier@0.9.5) (2019-11-26)
 
 
