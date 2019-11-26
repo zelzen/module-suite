@@ -8,4 +8,4 @@ import semver from 'semver';
  */
 export default function isExactSemver(version: string) {
   return semver.valid(version) !== null;
-};
+}

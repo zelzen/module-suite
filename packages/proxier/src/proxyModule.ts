@@ -5,13 +5,12 @@ import rewriteModule from '@module-suite/rewrite';
 import bundleModule from '@module-suite/bundle';
 import getAllDependencies from 'shared/utils/packageJson/getAllProdDependencies';
 import parsePackageUrl from 'shared/utils/packageJson/parsePackageUrl';
-import parsePackageJson from 'shared/utils/packageJson/parsePackageJson';
 import isExactSemver from 'shared/utils/semver/isExact';
 import { OutputType, TransformType } from 'shared/models/options';
 import resolveVersionTarFile from './utils/resolveVersionTarFile';
-import downloadPackage from './utils/downloadPackage';
 import resolveVersion from './utils/resolveVersion';
 import fetchManifest from './utils/fetchManifest';
+import resolveFileFromTar from './utils/resolveFileFromTar';
 import { createEtag, isFresh } from './utils/etag';
 import bundlingSupported from './utils/bundlingSupported';
 import { defaultRegistryUrl } from './constants';
@@ -91,13 +90,13 @@ export default async function proxyModule(
     return;
   }
 
-  const manifest = fetchManifest(registryUrl, packageName);
+  const manifest = await fetchManifest(registryUrl, packageName);
 
   // No need to search if exact version is passed
   if (isExactSemver(packageVersion) === false) {
     try {
       // Resolves a semver range to an exact version
-      const resolvedVersion = resolveVersion(await manifest, packageVersion);
+      const resolvedVersion = resolveVersion(manifest, packageVersion);
       // Redirect if the resolved version is different.
       // A redirect won't occur if the requested version is exact.
       if (resolvedVersion !== packageVersion) {
@@ -142,11 +141,7 @@ export default async function proxyModule(
   }
 
   try {
-    const tarFileUrl = resolveVersionTarFile(await manifest, packageVersion);
-    // TODO: Cache tarball download
-    const packageJson = downloadPackage(tarFileUrl, 'package.json').then((entry) => {
-      return parsePackageJson(entry.content.toString());
-    });
+    const packageJson = manifest.versions[packageVersion];
 
     // TODO: Support filenames which are directories
     // /es/proj
@@ -156,7 +151,7 @@ export default async function proxyModule(
     //
     // Lookup package entry if filename is not provided
     if (fileName === '') {
-      const pkg = await packageJson;
+      const pkg = packageJson;
       // Only support simple browser spec
       // https://github.com/defunctzombie/package-browser-field-spec#replace-specific-files---advanced
       const browserDec = typeof pkg.browser === 'string' && pkg.browser;
@@ -212,8 +207,8 @@ export default async function proxyModule(
       mimeType = 'application/javascript; charset=utf-8';
     }
 
-    // TODO: Use previously downloaded tarfile
-    const fileContent = downloadPackage(tarFileUrl, fileName)
+    const tarFileUrl = resolveVersionTarFile(manifest, packageVersion);
+    const fileContent = resolveFileFromTar(tarFileUrl, fileName)
       .then((entry) => {
         return entry.content.toString();
       })
@@ -233,7 +228,7 @@ export default async function proxyModule(
     }
 
     // All module dependencies
-    const dependencies = getAllDependencies(await packageJson);
+    const dependencies = getAllDependencies(packageJson);
 
     let transformedCode: string = '';
     console.log(
@@ -261,7 +256,7 @@ export default async function proxyModule(
         // rewriteModule rewrites all external imports too.
         // bundle-module probably needs to consume rewrite-module
         // with plain code from registry being passed in.
-        const [bundle] = await bundleModule(code, {
+        const bundle = await bundleModule(code, {
           host,
           packageName,
           packageVersion,

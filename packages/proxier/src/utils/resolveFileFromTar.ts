@@ -21,7 +21,13 @@ type FoundEntry = Entry & {
   content: Buffer;
 };
 
-export default async function downloadPackage(tarballUrl: string, entryName: string) {
+/**
+ * Downloads and resolves a file from a tarball
+ *
+ * @param tarballUrl - Tarball URL to download
+ * @param entryName - File entry to reesolve
+ */
+export default async function resolveFileFromTar(tarballUrl: string, entryName: string) {
   const res = await get(tarballUrl);
   return new Promise<FoundEntry>((resolve, reject) => {
     // If entryName starts with "/" remove it.

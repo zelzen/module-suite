@@ -16,7 +16,7 @@ it('should minify source code', () => {
   `;
 
   expect(minify(code)).toMatchInlineSnapshot(
-    `"import e from\\"react\\";export default function(){return e.createElement(\\"div\\",null,\\"hello world\\")}"`
+    `"import o from\\"react\\";function e(){return o.createElement(\\"div\\",null,\\"hello world\\")}function n(){console.log(\\"I do nothing an should be removed\\")}export default e;"`
   );
 });
 
