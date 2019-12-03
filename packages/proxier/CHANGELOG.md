@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.7](https://github.com/zelzen/module-suite/compare/@module-suite/proxier@0.9.6...@module-suite/proxier@0.9.7) (2019-12-03)
+
+
+### Bug Fixes
+
+* **proxier:** end request on redirect ([0af3794](https://github.com/zelzen/module-suite/commit/0af3794070d366c5d536bb78ce03e15b9baeb992))
+
+
+
+
+
 ## [0.9.6](https://github.com/zelzen/module-suite/compare/@module-suite/proxier@0.9.5...@module-suite/proxier@0.9.6) (2019-11-26)
 
 

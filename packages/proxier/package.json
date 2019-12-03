@@ -1,6 +1,6 @@
 {
   "name": "@module-suite/proxier",
-  "version": "0.9.6",
+  "version": "0.9.7",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
   "types": "lib/proxier/src/index.d.ts",
