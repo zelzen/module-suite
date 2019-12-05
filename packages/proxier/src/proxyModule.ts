@@ -140,12 +140,6 @@ export default async function proxyModule(
   try {
     const packageJson = manifest.versions[packageVersion];
 
-    // TODO: Support filenames which are directories
-    // /es/proj
-    //
-    // TODO: Support filenames which leave off the `.js` (maybe don't support this..., have them fix it)
-    // /es/shared/components/IframeFormSubmit.component
-    //
     // Lookup package entry if filename is not provided
     if (fileName === '') {
       const pkg = packageJson;
@@ -184,35 +178,16 @@ export default async function proxyModule(
       return;
     }
 
-    let fileExt = extname(fileName);
-    let mimeType = mimeTypes.contentType(fileExt);
-    // If a filename has no resolved mimetype
-    // default to the javascript extension.
-    // Matches Node which will auto resolve
-    // to `.js` if it is missing when using `require()`.
-    //
-    // This solves the case where packages leave off
-    // the `.js` portion of the extensions such as:
-    //   - /core-js@2.6.9/library/modules/es6.object.assign?output=system
-    //   - /draft-js@0.11.1/lib/DraftEditor.react?output=system
-    //
-    // TODO: This logic should be superseded by downloading the
-    // package tar file and searching for a correct matching file.
-    if (mimeType === false) {
-      fileExt = '.js';
-      fileName += '.js';
-      mimeType = 'application/javascript; charset=utf-8';
-    }
-
     const tarFileUrl = resolveVersionTarFile(manifest, packageVersion);
-    const fileContent = resolveFileFromTar(tarFileUrl, fileName)
-      .then((entry) => {
-        return entry.content.toString();
-      })
-      .catch((err) => {
-        // Re-throw error
-        throw err;
-      });
+    const fileEntry = await resolveFileFromTar(tarFileUrl, fileName);
+
+    const fileContent = fileEntry.content.toString();
+    // Set fileName to the resolve entry name
+    fileName = fileEntry.name;
+    const fileExt = extname(fileName);
+    // Default mimetype to Javascript
+    const mimeType = mimeTypes.contentType(fileExt) || 'application/javascript; charset=utf-8';
+    console.log({ fileExt, mimeType });
 
     // Set file content-type.
     res.setHeader('Content-Type', mimeType);
@@ -221,7 +196,7 @@ export default async function proxyModule(
     if (fileExt !== '.js') {
       // TODO: Use shared cache-control
       res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
-      return res.end(await fileContent);
+      return res.end(fileContent);
     }
 
     // All module dependencies
@@ -245,15 +220,12 @@ export default async function proxyModule(
       bundlingSupported(fileName, outputModuleType)
     ) {
       console.log(`Attempting to bundle "${packageName}@${packageVersion}`);
-      // Await code outside of try / catch to
-      // avoid error from being swallowed.
-      const code = await fileContent;
       try {
         // TODO: This only works with output='esm' currently since
         // rewriteModule rewrites all external imports too.
         // bundle-module probably needs to consume rewrite-module
         // with plain code from registry being passed in.
-        const bundle = await bundleModule(code, {
+        const bundle = await bundleModule(fileContent, {
           host,
           packageName,
           packageVersion,
@@ -273,7 +245,7 @@ export default async function proxyModule(
 
     // If module shouldn't be bundled or bundling failed.
     if (transformedCode === '') {
-      const module = await rewriteModule(await fileContent, {
+      const module = await rewriteModule(fileContent, {
         host,
         packageName,
         packageVersion,

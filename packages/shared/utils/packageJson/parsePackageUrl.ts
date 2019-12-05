@@ -32,12 +32,7 @@ export default function parsePackageURL(originalURL: string): PackageDec | null 
     return null;
   }
 
-  let [_, packageName, packageVersion = 'latest', fileName = ''] = match;
-
-  // Default to ".js" if non is specified
-  if (fileName !== '' && extname(fileName) === '') {
-    fileName += '.js';
-  }
+  const [_, packageName, packageVersion = 'latest', fileName = ''] = match;
 
   return {
     // If the URL is /@scope/name@version/file.js?main=browser

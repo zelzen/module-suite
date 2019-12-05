@@ -93,9 +93,12 @@ export default async function resolveFileFromTar(tarballUrl: string, entryName: 
           if (!entries[dirname]) {
             entries[dirname] = directoryEntry;
 
+            // Support filenames which are directories
+            // e.g. `lib` => `lib/index`
             if (directoryEntry.name === entryName) {
-              // @ts-ignore
-              foundEntry = directoryEntry;
+              // If entryName matches a directory,
+              // we are looking for a `index` file inside that dir.
+              entryName = path.join(directoryEntry.name, 'index');
             }
           }
 
@@ -106,7 +109,16 @@ export default async function resolveFileFromTar(tarballUrl: string, entryName: 
         // matches exactly or if it's an index.html file
         // and the client wants HTML.
         if (
-          entry.name === entryName
+          entry.name === entryName ||
+          // Support filenames which leave off the `.js`
+          // This matches NodeJS which will auto resolve
+          // to `.js` if it is missing when using `require()`.
+          //
+          // This solves the case where packages leave off
+          // the `.js` portion of the extensions such as:
+          //   - /core-js@2.6.9/library/modules/es6.object.assign
+          //   - /draft-js@0.11.1/lib/DraftEditor.react
+          entry.name === `${entryName}.js`
           // // Allow accessing e.g. `/index.js` or `/index.json` using
           // // `/index` for compatibility with CommonJS
           // (!wantsIndex && entry.name === `${entryName}.js`) ||
