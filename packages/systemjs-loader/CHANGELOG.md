@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.3](https://github.com/zelzen/module-suite/compare/@module-suite/systemjs-loader@0.4.2...@module-suite/systemjs-loader@0.4.3) (2019-12-05)
+
+
+### Bug Fixes
+
+* **systemjs-loader:** don't resolve import if host isn't set ([b900ef4](https://github.com/zelzen/module-suite/commit/b900ef4430c9577b116936845441688260ad2db8))
+
+
+
+
+
 ## [0.4.2](https://github.com/zelzen/module-suite/compare/@module-suite/systemjs-loader@0.4.1...@module-suite/systemjs-loader@0.4.2) (2019-12-05)
 
 **Note:** Version bump only for package @module-suite/systemjs-loader
