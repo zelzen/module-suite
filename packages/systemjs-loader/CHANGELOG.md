@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/zelzen/module-suite/compare/@module-suite/systemjs-loader@0.3.3...@module-suite/systemjs-loader@0.4.0) (2019-12-05)
+
+
+### Features
+
+* support any module url ([391e82e](https://github.com/zelzen/module-suite/commit/391e82e9aa2deaf0d124a060b3462c41daa8a30b))
+
+
+
+
+
 ## [0.3.3](https://github.com/zelzen/module-suite/compare/@module-suite/systemjs-loader@0.3.2...@module-suite/systemjs-loader@0.3.3) (2019-11-25)
 
 

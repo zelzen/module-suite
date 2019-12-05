@@ -1,6 +1,6 @@
 {
   "name": "@module-suite/test",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Test your modules to ensure compatibility with Module Server",
   "main": "bin/testModule.js",
   "sideEffects": false,

@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.8](https://github.com/zelzen/module-suite/compare/@module-suite/proxier@0.9.7...@module-suite/proxier@0.9.8) (2019-12-05)
+
+**Note:** Version bump only for package @module-suite/proxier
+
+
+
+
+
 ## [0.9.7](https://github.com/zelzen/module-suite/compare/@module-suite/proxier@0.9.6...@module-suite/proxier@0.9.7) (2019-12-03)
 
 
