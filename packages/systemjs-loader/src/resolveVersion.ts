@@ -16,7 +16,7 @@ const systemResolve = System.constructor.prototype.resolve;
 // I tried to mock System.import, but it isn't called for transitive dependencies.
 function resolveImportVersion(id: string, parentUrl: string): string | Promise<string> {
   // Bail out if the supplied Module Server Host is invalid
-  if (id.startsWith(context.host) === false) {
+  if (context.host === null || id.startsWith(context.host) === false) {
     return systemResolve.call(System, id, parentUrl);
   }
   const match = matchPackageId(id);
