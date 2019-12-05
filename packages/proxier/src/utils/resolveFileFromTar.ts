@@ -20,7 +20,6 @@ type FoundEntry = Entry & {
   size: number;
   content: Buffer;
 };
-
 /**
  * Downloads and resolves a file from a tarball
  *
@@ -30,6 +29,9 @@ type FoundEntry = Entry & {
 export default async function resolveFileFromTar(tarballUrl: string, entryName: string) {
   const res = await get(tarballUrl);
   return new Promise<FoundEntry>((resolve, reject) => {
+    // Normalize entry name
+    // e.g. "./index.js" => "index.js"
+    entryName = path.normalize(entryName);
     // If entryName starts with "/" remove it.
     // e.g. /cjs/react.production.js => cjs/react.production.js
     if (entryName.startsWith('/')) entryName = entryName.slice(1);
@@ -64,6 +66,7 @@ export default async function resolveFileFromTar(tarballUrl: string, entryName: 
         // prefix other than `package/`. e.g. the firebase package uses the
         // `firebase_npm/` prefix. So we just strip the first dir name.
         const name = stripLeadingSegment(headers.name);
+        // console.log({ name, entryName })
 
         // We are only interested in files that match the entryName.
         if (headers.type !== 'file' || name.indexOf(entryName) !== 0) {
