@@ -4,6 +4,7 @@ import { intersect } from 'semver-intersect';
 import System from './system';
 import matchPackageId from './utils/matchPackageId';
 import { resolveVersion, setVersion } from './utils/moduleCache';
+import { context } from './constants';
 
 const pendingVersions = new Map<string, [string, Promise<any>]>();
 const systemResolve = System.constructor.prototype.resolve;
@@ -14,6 +15,10 @@ const systemResolve = System.constructor.prototype.resolve;
 // It may still work in network lookups are async and local cache is async.
 // I tried to mock System.import, but it isn't called for transitive dependencies.
 function resolveImportVersion(id: string, parentUrl: string): string | Promise<string> {
+  // Bail out if the supplied Module Server Host is invalid
+  if (id.startsWith(context.host) === false) {
+    return systemResolve.call(System, id, parentUrl);
+  }
   const match = matchPackageId(id);
 
   // Bail out if no match
