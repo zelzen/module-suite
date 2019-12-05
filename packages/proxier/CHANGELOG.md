@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0](https://github.com/zelzen/module-suite/compare/@module-suite/proxier@0.9.9...@module-suite/proxier@0.10.0) (2019-12-05)
+
+
+### Features
+
+* support import paths with referrence directories ([9b160ab](https://github.com/zelzen/module-suite/commit/9b160ab5c3df7585d45a4ca42125d4ba9c18207d))
+
+
+
+
+
 ## [0.9.9](https://github.com/zelzen/module-suite/compare/@module-suite/proxier@0.9.8...@module-suite/proxier@0.9.9) (2019-12-05)
 
 
