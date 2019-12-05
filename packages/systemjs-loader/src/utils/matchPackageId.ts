@@ -1,5 +1,3 @@
-import { moduleUrl } from '../constants';
-
 const packageUrlFormat = /^\/?((?:@[^/@]+\/)?[^/@]+)(?:@([^/?]+))?(?:\?.*)?(\/.*)?$/;
 
 type Match<T> =
@@ -20,11 +18,14 @@ type Match<T> =
  * from URL identifier.
  */
 export default function matchPackageId<T extends string>(id: T): Match<T> {
-  if (id.startsWith(moduleUrl) === false) return null;
+  try {
+    // Return out if we don't have a fully qualified url
+    if (id.startsWith('http') === false) return null;
+    const { pathname } = new URL(id);
+    const match = packageUrlFormat.exec(pathname) as Match<T>;
 
-  // TODO: Get moduleUrl from regex. Ugggh
-  const importSpecifier = id.slice(moduleUrl.length);
-  const match = packageUrlFormat.exec(importSpecifier) as Match<T>;
-
-  return match;
+    return match;
+  } catch (err) {
+    return null;
+  }
 }

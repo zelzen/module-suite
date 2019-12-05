@@ -1,12 +1,9 @@
-// Support AMD
-// import 'systemjs/dist/extras/amd';
-
 type Deps = Array<string>;
 type RegisterDeclare = (execute: Function, context: any) => any;
 
 export interface System {
   /**
-   * This represents the System base class, which can be extended or reinstantiated to create a custom System instance.
+   * This represents the System base class, which can be extended or re-instantiated to create a custom System instance.
    */
   constructor: new () => System;
   /**
