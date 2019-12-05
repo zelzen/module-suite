@@ -1,7 +1,6 @@
 // Based on unpkg
 // https://github.com/unpkg/unpkg.com/blob/master/modules/utils/parsePackageURL.js
 import url from 'url';
-import { extname } from 'path';
 import { ParsedUrlQuery } from 'querystring';
 
 export type PackageDec = {

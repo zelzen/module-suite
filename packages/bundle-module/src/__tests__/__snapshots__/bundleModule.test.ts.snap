@@ -5,7 +5,7 @@ exports[`should bundle react@16.8.6 should match ESM snapshot 1`] = `
  * Bundled with @module-suite/bundle v1.0.0
  * @preserve
  */
-import _propTypesCheckPropTypes from 'https://d3pfvg4wng2sfk.cloudfront.net/prop-types@^15.6.2/checkPropTypes.js?output=esm';
+import _propTypesCheckPropTypes from 'https://d3pfvg4wng2sfk.cloudfront.net/prop-types@^15.6.2/checkPropTypes?output=esm';
 import _objectAssign from 'https://d3pfvg4wng2sfk.cloudfront.net/object-assign@^4.1.1?output=esm';
 
 var module = {
@@ -1389,7 +1389,7 @@ exports[`should bundle react@16.8.6 should match SystemJS snapshot 1`] = `
  * Bundled with @module-suite/bundle v1.0.0
  * @preserve
  */
-System.register(['https://d3pfvg4wng2sfk.cloudfront.net/prop-types@^15.6.2/checkPropTypes.js?output=system', 'https://d3pfvg4wng2sfk.cloudfront.net/object-assign@^4.1.1?output=system'], function (exports) {
+System.register(['https://d3pfvg4wng2sfk.cloudfront.net/prop-types@^15.6.2/checkPropTypes?output=system', 'https://d3pfvg4wng2sfk.cloudfront.net/object-assign@^4.1.1?output=system'], function (exports) {
   'use strict';
   var _propTypesCheckPropTypes, _objectAssign;
   return {

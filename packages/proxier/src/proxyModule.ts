@@ -187,7 +187,6 @@ export default async function proxyModule(
     const fileExt = extname(fileName);
     // Default mimetype to Javascript
     const mimeType = mimeTypes.contentType(fileExt) || 'application/javascript; charset=utf-8';
-    console.log({ fileExt, mimeType });
 
     // Set file content-type.
     res.setHeader('Content-Type', mimeType);
