@@ -30,7 +30,7 @@
     "test": "echo 'no test yet :('"
   },
   "dependencies": {
-    "semver": "^6.3.0",
+    "semver": "^7.0.0",
     "semver-intersect": "^1.4.0"
   },
   "devDependencies": {
