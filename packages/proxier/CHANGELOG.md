@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.10.1](https://github.com/zelzen/module-suite/compare/@module-suite/proxier@0.10.0...@module-suite/proxier@0.10.1) (2019-12-25)
+
+
+### Bug Fixes
+
+* **deps:** update dependency semver to v7 ([a812840](https://github.com/zelzen/module-suite/commit/a812840b232b137360e9ba2fbb93310193173065))
+
+
+
+
+
 # [0.10.0](https://github.com/zelzen/module-suite/compare/@module-suite/proxier@0.9.9...@module-suite/proxier@0.10.0) (2019-12-05)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@module-suite/systemjs-loader",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
   "sideEffects": true,
