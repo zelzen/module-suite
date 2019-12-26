@@ -138,6 +138,8 @@ export default async function proxyModule(
   }
 
   try {
+    // TODO: Get package.json from tar file.
+    // Manifest will not include full data.
     const packageJson = manifest.versions[packageVersion];
 
     // Lookup package entry if filename is not provided

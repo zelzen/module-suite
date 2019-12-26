@@ -51,13 +51,14 @@ export type Manifest = {
 
 const requestOptions = {
   headers: {
+    // TODO: Re-Enable once getting package.json from tar file.
     // Use Abbreviated NPM metadata
-    accept: 'application/vnd.npm.install-v1+json; q=1.0, application/json; q=0.8, */*',
+    // accept: 'application/vnd.npm.install-v1+json; q=1.0, application/json; q=0.8, */*',
     // Mock the referrer to enable abbreviated package json data.
     // Artifactory current doesn't support
     // just the accept header.
     // https://www.jfrog.com/jira/browse/RTFACT-18398
-    referer: 'install npm-proxy',
+    // referer: 'install npm-proxy',
   },
 };
 
