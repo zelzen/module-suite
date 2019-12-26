@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.5](https://github.com/zelzen/module-suite/compare/@module-suite/systemjs-loader@0.4.3...@module-suite/systemjs-loader@0.4.5) (2019-12-26)
+
+
+### Bug Fixes
+
+* **deps:** update dependency semver to v7 ([a812840](https://github.com/zelzen/module-suite/commit/a812840b232b137360e9ba2fbb93310193173065))
+
+
+
+
+
 ## [0.4.3](https://github.com/zelzen/module-suite/compare/@module-suite/systemjs-loader@0.4.2...@module-suite/systemjs-loader@0.4.3) (2019-12-05)
 
 
