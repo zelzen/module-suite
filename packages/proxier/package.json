@@ -37,7 +37,7 @@
     "fresh": "^0.5.2",
     "gunzip-maybe": "^1.4.1",
     "mime-types": "^2.1.24",
-    "semver": "^7.0.0",
+    "semver": "^6.3.0",
     "tar-stream": "^2.1.0"
   },
   "devDependencies": {
