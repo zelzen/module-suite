@@ -12,7 +12,8 @@
     "resolveJsonModule": true,
     "sourceMap": true,
     "lib": [
-      "esnext"
+      "esnext",
+      "DOM"
     ],
     "outDir": "./lib",
     "baseUrl": "./packages"

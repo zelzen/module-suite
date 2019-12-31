@@ -16,7 +16,7 @@ it('should handle proxy options', () => {
     host,
   });
 
-  expect(res).toBe(`${host}/react@16.11.0?minify=true&output=system&transforms=nodeenv%2Cimports`);
+  expect(res).toBe(`${host}/react@16.11.0?minify=true&output=system&transforms=nodeenv,imports`);
 });
 
 it('should handle filePaths', () => {
