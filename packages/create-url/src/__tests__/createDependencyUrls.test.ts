@@ -52,10 +52,10 @@ it('should should pass import options', () => {
 
   expect(res).toMatchInlineSnapshot(`
     Object {
-      "@module-suite/systemjs-loader": "http://localhost:3030/@module-suite/systemjs-loader@>2?minify=true&transforms=imports%2Cnodeenv",
-      "emotion": "http://localhost:3030/emotion@4.0.0?minify=true&transforms=imports%2Cnodeenv",
-      "foo": "http://localhost:3030/foo@4.x.x?minify=true&transforms=imports%2Cnodeenv",
-      "react": "http://localhost:3030/react@^16.11.0/cjs/react.production.min.js?minify=true&transforms=imports%2Cnodeenv",
+      "@module-suite/systemjs-loader": "http://localhost:3030/@module-suite/systemjs-loader@>2?minify=true&transforms=imports,nodeenv",
+      "emotion": "http://localhost:3030/emotion@4.0.0?minify=true&transforms=imports,nodeenv",
+      "foo": "http://localhost:3030/foo@4.x.x?minify=true&transforms=imports,nodeenv",
+      "react": "http://localhost:3030/react@^16.11.0/cjs/react.production.min.js?minify=true&transforms=imports,nodeenv",
     }
   `);
 });

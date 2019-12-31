@@ -1,5 +1,5 @@
-import { normalize } from 'path';
 import qs from 'qs';
+import normalize from 'path-normalize';
 import { ProxyOptions } from './models';
 
 /**
