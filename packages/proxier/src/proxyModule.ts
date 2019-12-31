@@ -7,6 +7,7 @@ import bundleModule from '@module-suite/bundle';
 import getAllDependencies from 'shared/utils/packageJson/getAllProdDependencies';
 import parsePackageUrl from 'shared/utils/packageJson/parsePackageUrl';
 import { OutputType, TransformType } from 'shared/models/options';
+import { PackageJson } from 'shared/models/packageJson';
 import resolveVersionTarFile from './utils/resolveVersionTarFile';
 import resolveVersion from './utils/resolveVersion';
 import fetchManifest from './utils/fetchManifest';
@@ -14,6 +15,7 @@ import resolveFileFromTar from './utils/resolveFileFromTar';
 import { createEtag, isFresh } from './utils/etag';
 import bundlingSupported from './utils/bundlingSupported';
 import { defaultRegistryUrl } from './constants';
+import findModuleEntryFile from './utils/findModuleEntryFile';
 
 type Query = {
   minify?: boolean;
@@ -113,6 +115,7 @@ export default async function proxyModule(
       res.statusCode = 302;
       res.setHeader(
         'Location',
+        // TODO: Allow createUrl to take `bundle` and pass
         createUrl(packageName, resolvedVersion, {
           host,
           filePath: fileName,
@@ -138,34 +141,15 @@ export default async function proxyModule(
   }
 
   try {
-    // TODO: Get package.json from tar file.
-    // Manifest will not include full data.
-    const packageJson = manifest.versions[packageVersion];
+    const tarFileUrl = resolveVersionTarFile(manifest, packageVersion);
+    // Manifest will not include full data
+    // so we need to fetch full package.json from tar file.
+    // TODO: This fetches the tar file twice
+    const packageJsonEntry = await resolveFileFromTar(tarFileUrl, 'package.json');
+    const packageJson: PackageJson = JSON.parse(packageJsonEntry.content.toString());
 
     // Lookup package entry if filename is not provided
-    if (fileName === '') {
-      const pkg = packageJson;
-      // Only support simple browser spec
-      // https://github.com/defunctzombie/package-browser-field-spec#replace-specific-files---advanced
-      const browserDec = typeof pkg.browser === 'string' && pkg.browser;
-      fileName =
-        // Use unpkg declaration first.
-        // Unpkg is a npm proxy similar to ours,
-        // so using this bundle is a good bet.
-        pkg.unpkg ||
-        // Browser field is before module / main because
-        // if this is present, it implies a custom browser specific build.
-        browserDec ||
-        pkg.module ||
-        pkg.main ||
-        // File name defaults to index.js if none
-        // is specified in the package.json
-        // https://stackoverflow.com/a/22513200/6635914
-        'index.js';
-      // Add `.js` extension if not specified.
-      // Node will auto resolve to `.js` if it is missing when using `require()`.
-      if (extname(fileName) === '') fileName += '.js';
-    }
+    if (fileName === '') fileName = findModuleEntryFile(packageJson);
 
     if (!fileName) {
       const error = `Could not find entry file for "${packageName}"`;
@@ -180,7 +164,7 @@ export default async function proxyModule(
       return;
     }
 
-    const tarFileUrl = resolveVersionTarFile(manifest, packageVersion);
+    // TODO: This fetches the tar file twice
     const fileEntry = await resolveFileFromTar(tarFileUrl, fileName);
 
     const fileContent = fileEntry.content.toString();

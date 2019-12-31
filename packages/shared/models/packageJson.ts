@@ -31,4 +31,7 @@ export type PackageJson = {
   devDependencies?: Dependencies;
   peerDependencies?: Dependencies;
   optionalDependencies?: Dependencies;
+  engines?: {
+    [engine: string]: string;
+  };
 };

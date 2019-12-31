@@ -1,4 +1,4 @@
-import { PackageJson, Repository } from 'shared/models/packageJson';
+import { PackageJson } from 'shared/models/packageJson';
 import { parseJsonBody } from './request';
 import { getRegistry as get } from './request/agents';
 
@@ -6,28 +6,22 @@ import { getRegistry as get } from './request/agents';
 export type AbbreviatedPackageJson = {
   name: PackageJson['name'];
   version: PackageJson['version'];
-  sideEffects: PackageJson['sideEffects'];
-  main: PackageJson['main'];
-  module: PackageJson['module'];
-  browser: PackageJson['browser'];
-  unpkg: PackageJson['unpkg'];
-  deprecated: PackageJson['deprecated'];
+  bin: PackageJson['bin'];
+  deprecated?: string;
   dependencies: PackageJson['dependencies'];
   devDependencies: PackageJson['devDependencies'];
   peerDependencies: PackageJson['peerDependencies'];
   optionalDependencies: PackageJson['optionalDependencies'];
-  /** Git commit sha from push */
-  gitHead?: string;
   dist: {
     /** Download URL */
     tarball: string;
     shasum: string;
   };
+  engines: PackageJson['engines'];
 };
 
 export type Manifest = {
   name: string;
-  description?: string;
   /** Dist tags are pointers to versions */
   'dist-tags': {
     latest: string;
@@ -36,29 +30,18 @@ export type Manifest = {
   versions: {
     [version: string]: AbbreviatedPackageJson;
   };
-  /** Version publish timestamps  */
-  time: {
-    /** When package was created */
-    created: string;
-    /** When package was last modified */
-    modified: string;
-    [version: string]: string;
-  };
-  /** Repository URI location */
-  repository: Repository;
-  license?: string;
+  modified: string;
 };
 
 const requestOptions = {
   headers: {
-    // TODO: Re-Enable once getting package.json from tar file.
     // Use Abbreviated NPM metadata
-    // accept: 'application/vnd.npm.install-v1+json; q=1.0, application/json; q=0.8, */*',
+    accept: 'application/vnd.npm.install-v1+json; q=1.0, application/json; q=0.8, */*',
     // Mock the referrer to enable abbreviated package json data.
     // Artifactory current doesn't support
     // just the accept header.
     // https://www.jfrog.com/jira/browse/RTFACT-18398
-    // referer: 'install npm-proxy',
+    referer: 'install npm-proxy',
   },
 };
 
