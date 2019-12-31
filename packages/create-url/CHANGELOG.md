@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.1](https://github.com/zelzen/module-suite/compare/@module-suite/create-url@0.4.0...@module-suite/create-url@0.4.1) (2019-12-31)
+
+
+### Bug Fixes
+
+* use normalize-path to support browsers ([835bd56](https://github.com/zelzen/module-suite/commit/835bd569a5fcfbd19025955b28a54ab4d863d010))
+
+
+
+
+
 # [0.4.0](https://github.com/zelzen/module-suite/compare/@module-suite/create-url@0.3.5...@module-suite/create-url@0.4.0) (2019-11-26)
 
 
