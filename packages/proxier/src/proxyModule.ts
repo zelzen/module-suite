@@ -7,7 +7,9 @@ import bundleModule from '@module-suite/bundle';
 import getAllDependencies from 'shared/utils/packageJson/getAllProdDependencies';
 import parsePackageUrl from 'shared/utils/packageJson/parsePackageUrl';
 import { OutputType, TransformType } from 'shared/models/options';
-import { PackageJson } from 'shared/models/packageJson';
+import parsePackageJson from 'shared/utils/packageJson/parsePackageJson';
+// @ts-ignore
+import gunzip from 'gunzip-maybe';
 import resolveVersionTarFile from './utils/resolveVersionTarFile';
 import resolveVersion from './utils/resolveVersion';
 import fetchManifest from './utils/fetchManifest';
@@ -16,6 +18,8 @@ import { createEtag, isFresh } from './utils/etag';
 import bundlingSupported from './utils/bundlingSupported';
 import { defaultRegistryUrl } from './constants';
 import findModuleEntryFile from './utils/findModuleEntryFile';
+import { get } from './utils/request';
+import streamToBuffer from './utils/streamToBuffer';
 
 type Query = {
   minify?: boolean;
@@ -142,11 +146,12 @@ export default async function proxyModule(
 
   try {
     const tarFileUrl = resolveVersionTarFile(manifest, packageVersion);
+    const tarRes = await get(tarFileUrl);
+    const tarBuffer = await streamToBuffer(tarRes.pipe(gunzip()));
     // Manifest will not include full data
     // so we need to fetch full package.json from tar file.
-    // TODO: This fetches the tar file twice
-    const packageJsonEntry = await resolveFileFromTar(tarFileUrl, 'package.json');
-    const packageJson: PackageJson = JSON.parse(packageJsonEntry.content.toString());
+    const packageJsonEntry = await resolveFileFromTar(tarBuffer, 'package.json');
+    const packageJson = parsePackageJson(packageJsonEntry.content.toString());
 
     // Lookup package entry if filename is not provided
     if (fileName === '') fileName = findModuleEntryFile(packageJson);
@@ -164,8 +169,7 @@ export default async function proxyModule(
       return;
     }
 
-    // TODO: This fetches the tar file twice
-    const fileEntry = await resolveFileFromTar(tarFileUrl, fileName);
+    const fileEntry = await resolveFileFromTar(tarBuffer, fileName);
 
     const fileContent = fileEntry.content.toString();
     // Set fileName to the resolve entry name

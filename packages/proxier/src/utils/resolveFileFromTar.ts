@@ -1,8 +1,6 @@
 import path from 'path';
-// @ts-ignore
-import gunzip from 'gunzip-maybe';
-import tar, { Headers, Extract } from 'tar-stream';
-import { get } from './request';
+import tar, { Headers } from 'tar-stream';
+import bufferToStream from './bufferToStream';
 
 function stripLeadingSegment(name: string) {
   return name.replace(/^[^/]+\/?/, '');
@@ -26,8 +24,7 @@ type FoundEntry = Entry & {
  * @param tarballUrl - Tarball URL to download
  * @param entryName - File entry to reesolve
  */
-export default async function resolveFileFromTar(tarballUrl: string, entryName: string) {
-  const res = await get(tarballUrl);
+export default async function resolveFileFromTar(tarBuffer: Buffer, entryName: string) {
   return new Promise<FoundEntry>((resolve, reject) => {
     // Normalize entry name
     // e.g. "./index.js" => "index.js"
@@ -35,10 +32,8 @@ export default async function resolveFileFromTar(tarballUrl: string, entryName: 
     // If entryName starts with "/" remove it.
     // e.g. /cjs/react.production.js => cjs/react.production.js
     if (entryName.startsWith('/')) entryName = entryName.slice(1);
-    if (res.statusCode !== 200)
-      reject(`Expected Status code 200. Received ${res.statusCode}. URL: "${tarballUrl}"`);
 
-    const tarStream: Extract = res.pipe(gunzip()).pipe(tar.extract());
+    const tarStream = bufferToStream(tarBuffer).pipe(tar.extract());
 
     const entries: Record<string, Entry> = {};
     let foundEntry: FoundEntry | null = null;
