@@ -7,7 +7,7 @@
   "useWorkspaces": true,
   "command": {
     "publish": {
-      "ignoreChanges": ["*.md", "*.test.*", "*.test.js", "**/__tests__/**", ".gitignore", "*.html"],
+      "ignoreChanges": ["*.md", "*.test.*", "*.test.js", "**/__tests__/**", ".gitignore", "*.html", "examples/**"],
       "message": "chore(release): publish",
       "push": false
     }

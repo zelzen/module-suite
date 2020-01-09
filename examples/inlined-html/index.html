@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Module Test</title>
+</head>
+<body>
+  <div id="react-app"></div>
+  <div id="lit-app"></div>
+  <script type="module">
+    import React from 'https://modulecdn.com/react?output=esm'
+    import ReactDOM from 'https://modulecdn.com/react-dom?output=esm'
+    import { css } from 'https://modulecdn.com/emotion?output=esm'
+
+    const styles = css`
+      color: red;
+      text-align: center;
+      display: block;
+    `
+
+    console.log({ React, ReactDOM });
+    function Hello() {
+      return React.createElement('h1', { className: styles }, 'Hello World from React!')
+    }
+
+    ReactDOM.render(React.createElement(Hello), document.getElementById('react-app'))
+  </script>
+  <script type="module">
+    import { html, render } from 'https://modulecdn.com/lit-html@1.1.2?output=esm&bundle=true';
+    import { css } from 'https://modulecdn.com/emotion?output=esm'
+
+    const styles = css`
+      color: magenta;
+      text-align: center;
+      display: block;
+    `
+
+    const sayHello = (name) => html`<h1 class="${styles}">Hello ${name} from lit-html!</h1>`;
+
+    render(sayHello('World'), document.getElementById('lit-app'));
+  </script>
+</body>
+
+</html>
