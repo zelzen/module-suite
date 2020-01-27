@@ -43,7 +43,7 @@
   "devDependencies": {
     "@types/follow-redirects": "^1.8.0",
     "@types/fresh": "^0.5.0",
-    "@types/jest": "^24.0.23",
+    "@types/jest": "^25.0.0",
     "@types/mime-types": "^2.1.0",
     "@types/node": "^10.17.5",
     "@types/semver": "^6.2.0",
