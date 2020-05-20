@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.8](https://github.com/zelzen/module-suite/compare/@module-suite/rewrite@0.7.7...@module-suite/rewrite@0.7.8) (2020-05-20)
+
+
+### Bug Fixes
+
+* update minify compress options ([c28c7d8](https://github.com/zelzen/module-suite/commit/c28c7d88aa8d86be86fbb1a62acfe791d4dbf9dd))
+
+
+
+
+
 ## [0.7.7](https://github.com/zelzen/module-suite/compare/@module-suite/rewrite@0.7.6...@module-suite/rewrite@0.7.7) (2019-12-31)
 
 **Note:** Version bump only for package @module-suite/rewrite

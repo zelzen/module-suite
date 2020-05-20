@@ -1,6 +1,6 @@
 {
   "name": "@module-suite/bundle",
-  "version": "0.6.9",
+  "version": "0.6.10",
   "description": "Bundles a module in memory with Rollup",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
@@ -27,7 +27,7 @@
     "build:types": "tsc -p . --emitDeclarationOnly"
   },
   "dependencies": {
-    "@module-suite/rewrite": "^0.7.7",
+    "@module-suite/rewrite": "^0.7.8",
     "got": "^9.6.0",
     "rollup": "^1.25.2",
     "rollup-plugin-babel": "^4.3.3",

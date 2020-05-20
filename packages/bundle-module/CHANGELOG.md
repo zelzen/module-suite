@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.10](https://github.com/zelzen/module-suite/compare/@module-suite/bundle@0.6.9...@module-suite/bundle@0.6.10) (2020-05-20)
+
+**Note:** Version bump only for package @module-suite/bundle
+
+
+
+
+
 ## [0.6.9](https://github.com/zelzen/module-suite/compare/@module-suite/bundle@0.6.8...@module-suite/bundle@0.6.9) (2019-12-31)
 
 **Note:** Version bump only for package @module-suite/bundle
