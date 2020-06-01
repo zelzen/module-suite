@@ -47,6 +47,6 @@
     "@types/mime-types": "^2.1.0",
     "@types/node": "^10.17.5",
     "@types/semver": "^6.2.0",
-    "@types/tar-stream": "^1.6.1"
+    "@types/tar-stream": "^2.0.0"
   }
 }
