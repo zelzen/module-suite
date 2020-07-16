@@ -30,7 +30,7 @@
     "clean": "rm -rf lib/"
   },
   "dependencies": {
-    "path-normalize": "^4.0.6",
+    "path-normalize": "^5.0.0",
     "qs": "^6.9.0"
   },
   "devDependencies": {
