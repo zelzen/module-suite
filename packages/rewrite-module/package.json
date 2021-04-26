@@ -36,6 +36,6 @@
     "@module-suite/create-url": "^0.4.1",
     "@zelz/babel-plugin-transform-commonjs": "^1.2.0",
     "babel-plugin-minify-dead-code-elimination": "^0.5.1",
-    "terser": "^4.3.9"
+    "terser": "^5.0.0"
   }
 }
