@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@module-suite/rewrite": "^0.4.2",
-    "commander": "^4.0.0",
+    "commander": "^7.0.0",
     "fs-extra": "^8.1.0",
     "yurnalist": "^1.1.1"
   },
