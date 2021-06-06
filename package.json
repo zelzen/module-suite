@@ -45,7 +45,7 @@
     "builtins": "^2.0.1",
     "concurrently": "^5.0.0",
     "eslint": "^6.6.0",
-    "jest": "^24.9.0",
+    "jest": "^27.0.0",
     "lerna": "^3.19.0",
     "nodemon": "^2.0.1",
     "prettier": "^1.19.1",
